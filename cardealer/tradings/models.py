@@ -84,3 +84,5 @@ class Image(models.Model):
 
     def __unicode__(self):
         return f"{self.vehicle.title}"
+
+

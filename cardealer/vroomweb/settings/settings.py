@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tradings',
+    # 'django_rabbitmq',
 ]
 
 MIDDLEWARE = [
@@ -110,3 +112,14 @@ DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
+RABBITMQ = {
+    'default': {
+        'host': 'localhost',
+        'port': 5672,
+        # 'user': 'guest',
+        'username': 'guest',
+        'password': 'guest',
+        # 'virtual_host': '/'
+    },
+}
