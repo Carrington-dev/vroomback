@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class UserManager(DjangoUserManager["User"]):
     """Custom manager for the User model."""
 
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, username, first_name='', last_name='', password=None):
         if not email:
             raise ValueError('Users must have an email address')
         if not username:
@@ -18,6 +18,8 @@ class UserManager(DjangoUserManager["User"]):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            first_name=first_name,
+            last_name=last_name,
         )
 
         user.set_password(password)

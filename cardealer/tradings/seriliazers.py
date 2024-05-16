@@ -1,0 +1,109 @@
+from rest_framework import serializers
+from tradings.models import CarModel, City, Country, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+
+class VehicleOtherFeaturesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleOtherFeatures
+        fields = [ "id", "induction", "cylinders", "wheels", "seats", "engine_config",\
+                  "valve_gear", "fuel_injection", "engine_size", "fuel_type", \
+                    "engine_location","power","torque","drive_type","global_safety_rating",\
+                        "stearing_wheel","bluetooth","usb_port","remote_central_locking", \
+                            'transmission', 'body_type']
+
+class VehicleKeyFeaturesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VehicleKeyFeatures
+        fields = [ "id", "premium_pheel", "sun_roof", "premium_audio", "navigation", "bluetooth", "premium_seat_material", "front_heated_seats", "remote_engine_start", "blind_spot_System", "multi_zone_climate_control", "has_roof_rack", "electronic_doors", "has_security", "push_start_button", "turbo_charger", "driver_airbag", "side_airbag", "front_passenger_airbag", "cruise_control", "anti_lock_braking_systems", "front_park_camera", "power_steering", "roll_stabilitity_control", "rear_parking_camera", "electronic_windows", "electronic_brake_pressure_distribution", "has_immobilzer",]
+
+class MakeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Make
+        fields = [ 'name', 'id' , ]
+
+
+class CarMakeSerializer(serializers.PrimaryKeyRelatedField):
+    class Meta:
+        model = Make
+        fields = [ 'name', ]
+
+    def get_queryset(self):
+        return Make.objects.all()
+
+class CitySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = City
+        fields = [ 'name', 'id' , ]
+
+class ModelSerializer(serializers.ModelSerializer):
+    make = CarMakeSerializer(queryset=Make.objects.all())
+    
+    class Meta:
+        model = CarModel
+        fields = [ 'name', 'id' ,  'make']
+
+
+class StateSerializer(serializers.ModelSerializer):
+    cities =  CitySerializer(many=True, read_only=True)
+    class Meta:
+        model = State
+        fields = [ 'name', 'id' , 'cities' ]
+
+
+class VehicleMakeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Make
+        fields = [ 'name', ]
+
+    def get_queryset(self):
+        return Make.objects.all()
+
+class VehicleCitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = [ 'name', ]
+
+class VehicleModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarModel
+        fields = [ 'name',   ]
+    def get_queryset(self):
+        return CarModel.objects.all()
+
+
+class VehicleStateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = State
+        fields = [ 'name', ]
+        
+    def get_queryset(self):
+        return State.objects.all()
+
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    states = StateSerializer(many=True, read_only=True)
+    class Meta:
+        model = Country
+        fields = [ 'name', 'id' , 'states' ]
+
+
+
+class VehicleSerializer(serializers.ModelSerializer):
+    state = VehicleStateSerializer(read_only=True)
+    model = VehicleModelSerializer(read_only=True)
+    city = VehicleCitySerializer(read_only=True)
+    make = VehicleMakeSerializer(read_only=True)
+    # state = VehicleStateSerializer(queryset=State.objects.all())
+    # model = VehicleModelSerializer(queryset=CarModel.objects.all())
+    # city = VehicleCitySerializer(queryset=City.objects.all())
+    # make = VehicleMakeSerializer(queryset=Make.objects.all())
+    other_features =  VehicleOtherFeaturesSerializer(read_only=True)
+    key_features =  VehicleKeyFeaturesSerializer(read_only=True)
+
+    class Meta:
+        model = Vehicle
+        fields = [ "title", "model", "make", "state", "city", 'photo',  'year',"price", \
+                  "mileage", "engine_capacity", "condition", "colour", "top_speed", \
+                  'key_features', 'other_features', 'slug', \
+                    "stock",  "horse_power", "airbag_quantity", "gears", ]

@@ -1,9 +1,6 @@
-import json
 import random
 import time
-import uuid
 import pika
-import requests
 
 class RabbitMQ:
     def __new__(cls, username, password, host, port):
@@ -42,18 +39,9 @@ class RabbitMQ:
                 
 
     def do_what_on_message(self, channel, method, properties, body):
-        print(f"Recieved Data { body }")
-        # bo = json.loads(body)
-        response = requests.post(
-            url='http://localhost:8000/api/v1/auth/users/', 
-            json=json.loads(body),
-            headers={"Content-Type":"application/json"}
-        )
-        print(response.text)
+        t =  random.randint(1, 3)
+        print(f"This will run for {t} seconds, recieved id { body }")
+        # time.sleep((t))
         channel.basic_ack(delivery_tag=method.delivery_tag)
 
-
-
-
-
-# sender = RabbitMQ('guest', 'guest', 'localhost', 5672)
+sender = RabbitMQ('guest', 'guest', 'localhost', 5672)

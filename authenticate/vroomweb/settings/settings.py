@@ -25,3 +25,14 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = config("EMAIL_USE_TLS")
 DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 DEFAULT_FROM_ADMIN = config("DEFAULT_FROM_ADMIN")
+
+RABBITMQ = {
+    'default': {
+        'host': 'localhost',
+        'port': 5672,
+        # 'user': 'guest',
+        'username': 'guest',
+        'password': 'guest',
+        # 'virtual_host': '/'
+    },
+}
