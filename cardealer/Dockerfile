@@ -20,4 +20,4 @@ EXPOSE 8000
 RUN python manage.py collectstatic --noinput
 
 # Run Django application
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "foreweb.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "vroomweb.wsgi:application"]
