@@ -20,8 +20,8 @@ services:
       - "8002:8000"
     restart: always
     volumes:
-      # - ./.authservice/:/usr/src/app/
-      - ./.cardealer/:/app/
+      - ./.cardealerservice/:/usr/src/app/
+      # - ./.cardealer/:/app/
     # command: gunicorn payglen.wsgi:application --bind 0.0.0.0:8000
     environment:
       - DJANGO_SETTINGS_MODULE=vroomweb.settings.settings
@@ -59,7 +59,7 @@ services:
 
   nginx:
     # image: nginx:latest
-    container_name: nginx
+    container_name: webserverservice
     build: ./nginx
     restart: always
     ports:
@@ -68,7 +68,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - authenticateservice
-      - cardealer
+      - cardealerservice
     networks:
       - payflex_network
 

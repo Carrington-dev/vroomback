@@ -16,6 +16,11 @@ __pycache__/
 # C extensions
 *.so
 
+# .Docker Volumes
+.cardealer
+.cardealerservice
+.authenticateservice
+
 # Distribution / packaging
 .Python
 build/
