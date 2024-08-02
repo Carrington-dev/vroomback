@@ -26,3 +26,6 @@ class User(AbstractUser):
 
     def __unicode__(self):
         return f"<User @{self.email}>"
+
+    class Meta:
+        ordering = [ "email" ]

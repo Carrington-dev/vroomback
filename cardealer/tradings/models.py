@@ -7,6 +7,7 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
 from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, STATUS, YEARS_TO_CHOOSE
+from vroomweb.settings import settings
 
 class Country(models.Model):
     id      = models.UUIDField( 
@@ -138,6 +139,7 @@ class Vehicle(models.Model):
                             primary_key = True, 
                             default = uuid.uuid4, 
                             editable = False)
+    user                = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE)
     title               = models.CharField(max_length=254)
     model               = models.ForeignKey(CarModel, related_name="vehicles", on_delete=models.CASCADE)
     make                = models.ForeignKey(Make, related_name="make_vehicles", on_delete=models.CASCADE)
