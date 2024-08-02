@@ -9,36 +9,81 @@ from .mq import RabbitMQ
 from django.http import JsonResponse
 from vroomweb.settings import settings
 from rest_framework.viewsets import ModelViewSet
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 class MakeViewSet(ModelViewSet):
     serializer_class = MakeSerializer
     queryset = Make.objects.all()
 
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
 class StateViewSet(ModelViewSet):
     serializer_class = StateSerializer
     queryset = State.objects.all()
+
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 class CityViewSet(ModelViewSet):
     serializer_class = CitySerializer
     queryset = City.objects.all()
 
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
 class CountryViewSet(ModelViewSet):
     serializer_class = CountrySerializer
     queryset = Country.objects.all()
 
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 
 class VehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer
     queryset = Vehicle.objects.filter(status='published')
 
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 class CarModelViewSet(ModelViewSet):
     serializer_class = ModelSerializer
     queryset = CarModel.objects.all()
 
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 
 
