@@ -12,6 +12,6 @@ router.register('vehicles', viewset=views.VehicleViewSet, basename='vehicle')
 router.register('models', viewset=views.CarModelViewSet, basename='model')
 
 urlpatterns = [
-    path('', views.send_message, name='send_message'),
+    # path('', views.send_message, name='send_message'),
     path('api/v1/', include(router.urls)),
 ]

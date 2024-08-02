@@ -88,7 +88,7 @@ class CarModelViewSet(ModelViewSet):
 
 
 
-
+"""
 def send_message(request):
     message = ''
 
@@ -114,3 +114,4 @@ def send_message(request):
         'message': message,
         'time_sent': str(datetime.datetime.now())
     })
+"""
