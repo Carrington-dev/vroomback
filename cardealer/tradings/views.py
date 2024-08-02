@@ -13,6 +13,7 @@ from vroomweb.settings import settings
 from rest_framework.viewsets import ModelViewSet
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters.rest_framework import DjangoFilterBackend
 
 class MakeViewSet(ModelViewSet):
     serializer_class = MakeSerializer
@@ -67,6 +68,8 @@ class VehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer
     queryset = Vehicle.objects.filter(status='published')
     filterset_class = VehicleModelFilter
+    # filterset_fields = ['title', 'model_name', 'model_make_name']
+
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
