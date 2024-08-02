@@ -139,7 +139,7 @@ class Vehicle(models.Model):
                             primary_key = True, 
                             default = uuid.uuid4, 
                             editable = False)
-    user                = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE)
+    user                = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="vehicles", blank=True, null=True, on_delete=models.CASCADE)
     title               = models.CharField(max_length=254)
     model               = models.ForeignKey(CarModel, related_name="vehicles", on_delete=models.CASCADE)
     make                = models.ForeignKey(Make, related_name="make_vehicles", on_delete=models.CASCADE)

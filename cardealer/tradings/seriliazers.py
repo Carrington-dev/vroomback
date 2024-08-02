@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from security.models import User
 from tradings.models import CarModel, City, Country, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class VehicleOtherFeaturesSerializer(serializers.ModelSerializer):
@@ -35,7 +36,7 @@ class CitySerializer(serializers.ModelSerializer):
         model = City
         fields = [ 'name', 'id' , ]
 
-class ModelSerializer(serializers.ModelSerializer):
+class CarModelSerializer(serializers.ModelSerializer):
     make = CarMakeSerializer(queryset=Make.objects.all())
     
     class Meta:
@@ -107,3 +108,10 @@ class VehicleSerializer(serializers.ModelSerializer):
                   "mileage", "engine_capacity", "condition", "colour", "top_speed", \
                   'key_features', 'other_features', 'slug', \
                     "stock",  "horse_power", "airbag_quantity", "gears", ]
+        
+class VehicleSerializerByUser(serializers.ModelSerializer):
+    vehicles = VehicleSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = User
+        fields = [ "id", "first_name", "last_name", "vehicles" ]

@@ -2,8 +2,9 @@ import json
 import datetime
 from django.shortcuts import render
 
+from security.models import User
 from tradings.mixins import VehicleMixin
-from tradings.seriliazers import CitySerializer, CountrySerializer, MakeSerializer, ModelSerializer, StateSerializer, VehicleSerializer
+from tradings.seriliazers import CitySerializer, CountrySerializer, MakeSerializer, CarModelSerializer, StateSerializer, VehicleSerializer, VehicleSerializerByUser
 from tradings.models import CarModel, City, Country, Make, State, Vehicle
 from .mq import RabbitMQ
 from django.http import JsonResponse
@@ -74,8 +75,20 @@ class VehicleViewSet(VehicleMixin):
         return super().retrieve(request, *args, **kwargs)
 
 class CarModelViewSet(ModelViewSet):
-    serializer_class = ModelSerializer
+    serializer_class = CarModelSerializer
     queryset = CarModel.objects.all()
+
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+class UserVehiclesModelViewSet(VehicleMixin):
+    serializer_class = VehicleSerializerByUser
+    queryset = User.objects.all()
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
