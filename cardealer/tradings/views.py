@@ -3,6 +3,7 @@ import datetime
 from django.shortcuts import render
 
 from security.models import User
+from tradings.filters import VehicleModelFilter
 from tradings.mixins import VehicleMixin
 from tradings.seriliazers import CitySerializer, CountrySerializer, MakeSerializer, CarModelSerializer, StateSerializer, VehicleSerializer, VehicleSerializerByUser
 from tradings.models import CarModel, City, Country, Make, State, Vehicle
@@ -65,6 +66,7 @@ class CountryViewSet(ModelViewSet):
 class VehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer
     queryset = Vehicle.objects.filter(status='published')
+    filterset_class = VehicleModelFilter
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):

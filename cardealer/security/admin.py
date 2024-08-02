@@ -7,4 +7,4 @@ admin.site.unregister(Group)
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'username', 'is_admin',)
+    list_display = ( 'id', 'email', 'username', 'is_admin', 'date_joined',)
