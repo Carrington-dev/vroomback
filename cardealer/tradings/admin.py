@@ -18,8 +18,9 @@ class MakeAdmin(admin.ModelAdmin):
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ["title", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
+    list_display = [ 'slug', "title", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
                     "stock", "horse_power", "airbag_quantity", 'status_icon',  "created_at",]
+    search_fields = ["title", "model__name", "make__name", "state__name", "city__name", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", ]
     inlines = [
         ImageInline
     ]

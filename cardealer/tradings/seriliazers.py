@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from security.models import User
-from tradings.models import CarModel, City, Enquiry, Country, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Color, Enquiry, Country, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,11 +24,11 @@ class VehicleKeyFeaturesSerializer(serializers.ModelSerializer):
 class MakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
-        fields = [ 'name', 'id' , ]
+        fields = [ 'name', 'id' , "icon" ]
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Make
+        model = Color
         fields = [ 'name', 'id' , ]
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class CarMakeSerializer(serializers.PrimaryKeyRelatedField):
     class Meta:
         model = Make
-        fields = [ 'name', 'id' ]
+        fields = [ 'name', 'id', "icon" ]
 
     def get_queryset(self):
         return Make.objects.all()
@@ -70,7 +70,7 @@ class StateSerializer(serializers.ModelSerializer):
 class VehicleMakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
-        fields = [ 'name', 'id' ]
+        fields = [ 'name', 'id', "icon" ]
 
     def get_queryset(self):
         return Make.objects.all()

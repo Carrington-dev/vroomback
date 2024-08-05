@@ -8,14 +8,14 @@ from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
 from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, IMAGE_CLASSES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
 from vroomweb.settings import settings
+from django.core.validators import FileExtensionValidator
 
 class Country(models.Model):
-    id      = models.UUIDField( 
-                primary_key = True, 
-                default = uuid.uuid4, 
-                editable = False)
-    name    = models.CharField(max_length=254, unique=True, choices=COUNTRIES, default="ZA")
-
+    id        = models.UUIDField( 
+                    primary_key = True, 
+                    default = uuid.uuid4, 
+                    editable = False)
+    name       = models.CharField(max_length=254, unique=True, choices=COUNTRIES, default="ZA")
 
     created_at = models.DateTimeField(default=datetime.now, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -37,6 +37,7 @@ class Make(models.Model):
                 default = uuid.uuid4, 
                 editable = False)
     name    = models.CharField(max_length=254, unique=True)
+    icon       = models.FileField(upload_to="icons/%Y/%m/%d/", default="vehicle/tesla.svg", validators=[FileExtensionValidator(['svg'])])
 
 
     created_at = models.DateTimeField(default=datetime.now, blank=True)
