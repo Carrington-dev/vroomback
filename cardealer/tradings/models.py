@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
-from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, STATUS, YEARS_TO_CHOOSE
+from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
 from vroomweb.settings import settings
 
 class Country(models.Model):
@@ -160,6 +160,7 @@ class Vehicle(models.Model):
     gears               = models.IntegerField(default=4)
     description         = models.TextField(blank=True, null=True)
     short_description   = models.CharField(max_length=500, blank=True, null=True)
+    type                = models.CharField(choices=TYPE_OF_VEHICLE, max_length=100, default='draft')
     status              = models.CharField(choices=STATUS, max_length=100, default='draft')
     slug                = models.SlugField(max_length=250, default=uuid.uuid4, unique=True)
     created_at          = models.DateTimeField(default=datetime.now, blank=True)

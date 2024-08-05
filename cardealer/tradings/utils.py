@@ -281,3 +281,18 @@ STATUS = (
     ('pending', 'Pending'),
     ('published', 'Published'),
 )
+
+TYPE_OF_VEHICLE = (
+    ('suv', 'SUV'),
+    ('bus', 'Bus'),
+    ('truck', 'Truck'),
+    ('sedan', 'Sedan'),
+    ('coupe', 'Coupe'),
+    ('minivan', 'Minivan'),
+    ('crossover', 'Crossover'),
+    ('hatchback', 'Hatchback'),
+    ('sportscar', 'Sports car'),
+    ('convertible', 'Convertible'),
+    ('pickuptruck', 'Pickup Truck'),
+    ('stationwagon', 'Station Wagon'),
+)
