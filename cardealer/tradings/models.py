@@ -160,7 +160,7 @@ class Vehicle(models.Model):
     gears               = models.IntegerField(default=4)
     description         = models.TextField(blank=True, null=True)
     short_description   = models.CharField(max_length=500, blank=True, null=True)
-    type                = models.CharField(choices=TYPE_OF_VEHICLE, max_length=100, default='draft')
+    type                = models.CharField(choices=TYPE_OF_VEHICLE, max_length=100, default='sedan')
     status              = models.CharField(choices=STATUS, max_length=100, default='draft')
     slug                = models.SlugField(max_length=250, default=uuid.uuid4, unique=True)
     created_at          = models.DateTimeField(default=datetime.now, blank=True)

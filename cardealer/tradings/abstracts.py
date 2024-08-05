@@ -1,6 +1,6 @@
 from django.db import models
 
-from tradings.utils import CONDITION, FUEL_TYPES, TRANSMISSION
+from tradings.utils import CONDITION, FUEL_TYPES, TRANSMISSION, TYPE_OF_VEHICLE
 
 class KeyFeatureTemplate(models.Model): 
     premium_pheel                           = models.BooleanField(default=False)
@@ -54,7 +54,7 @@ class EnginePerformanceTemplate(models.Model):
     power                           = models.CharField(max_length=254, default='140 kw ')
     torque                          = models.CharField(max_length=254, default='7000 rpm')
     drive_type                      = models.CharField(max_length=254, default='FWD')
-    body_type                      = models.CharField(max_length=254, default='Hatchback')
+    body_type                       = models.CharField(max_length=254,  choices=TYPE_OF_VEHICLE, default='Hatchback')
     global_safety_rating            = models.CharField(max_length=254, default='G NCAP Rating', help_text='Global NCAP Safety Rating')
     stearing_wheel                  = models.CharField(max_length=100, default="Standard")
     bluetooth                       = models.CharField(max_length=100, default="Standard")
