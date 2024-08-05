@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tradings.actions import duplicate_event, mark_as_draft, mark_as_published
+from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published
 from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class ImageInline(admin.TabularInline):
@@ -25,7 +25,7 @@ class VehicleAdmin(admin.ModelAdmin):
     ]
 
     actions = [
-        duplicate_event, mark_as_published, mark_as_draft
+        duplicate_event, mark_as_published, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar
     ]
 
     def status_icon(self, obj):

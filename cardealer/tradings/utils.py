@@ -8,10 +8,10 @@ FUEL_TYPES = (
     # ("Electric", "Electric",),
 )
 CONDITION = ( 
-    ("New Car", "New Car",),
-    ("Used Car", "Used Car",),
-    ("Demo Car", "Demo Car",),
-    ("Accident Car", "Accident Car",),
+    ("newcar", "New Car",),
+    ("usedcar", "Used Car",),
+    ("democar", "Demo Car",),
+    ("accidentcar", "Accident Car",),
     # ("Electric", "Electric",),
 )
 

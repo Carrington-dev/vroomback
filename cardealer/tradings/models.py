@@ -150,7 +150,7 @@ class Vehicle(models.Model):
     mileage             = models.IntegerField(default=0)
     engine_capacity     = models.IntegerField(default=0)
     video_url           = models.URLField(default=DEFAULT_VIDEO_LINK)
-    condition           = models.CharField(max_length=100, choices=CONDITION, default='New Car')
+    condition           = models.CharField(max_length=100, choices=CONDITION, default='newcar')
     colour              = models.CharField(max_length=100, default='White')
     top_speed           = models.IntegerField(default=200)
     stock               = models.IntegerField(default=1)

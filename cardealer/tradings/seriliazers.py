@@ -29,13 +29,13 @@ class MakeSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = [ 'color', 'photo' , ]
+        fields = [ 'color', 'photo' , 'id',]
 
 
 class CarMakeSerializer(serializers.PrimaryKeyRelatedField):
     class Meta:
         model = Make
-        fields = [ 'name', ]
+        fields = [ 'name', 'id' ]
 
     def get_queryset(self):
         return Make.objects.all()
@@ -64,10 +64,12 @@ class StateSerializer(serializers.ModelSerializer):
 class VehicleMakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
-        fields = [ 'name', ]
+        fields = [ 'name', 'id' ]
 
     def get_queryset(self):
         return Make.objects.all()
+    
+
 
 class VehicleCitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -137,3 +139,13 @@ class VehicleSerializerByUser(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [ "id", "first_name", "last_name", "vehicles" ]
+
+
+class MakeVehiclesSerializer(serializers.ModelSerializer):
+    make_vehicles = VehicleSerializer(many=True)
+    class Meta:
+        model = Make
+        fields = [ 'name', 'id', "make_vehicles" ]
+
+    def get_queryset(self):
+        return Make.objects.all()
