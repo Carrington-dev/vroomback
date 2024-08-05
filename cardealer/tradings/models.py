@@ -179,6 +179,12 @@ class Vehicle(models.Model):
         super().save()
         return super().save(*args, **kwargs)
     
+    def interior_images(self):
+        return self.images.filter(side="interior")
+    
+    def exterior_images(self):
+        return self.images.filter(side="exterior")
+    
     class Meta:
         ordering = [ '-created_at' ]
 

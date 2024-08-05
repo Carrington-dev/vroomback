@@ -106,6 +106,10 @@ class VehicleSerializer(serializers.ModelSerializer):
     city = VehicleCitySerializer(read_only=True)
     make = VehicleMakeSerializer(read_only=True)
     images = ImageSerializer(many=True, read_only=True)
+    # interior_images = serializers.SerializerMethodField(method_name='interior')
+    # exterior_images = serializers.SerializerMethodField(method_name='exterior')
+    interior_images = ImageSerializer(many=True, read_only=True)
+    exterior_images = ImageSerializer(many=True, read_only=True)
     # state = VehicleStateSerializer(queryset=State.objects.all())
     # model = VehicleModelSerializer(queryset=CarModel.objects.all())
     # city = VehicleCitySerializer(queryset=City.objects.all())
@@ -115,11 +119,18 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vehicle
-        fields = [  'id', "title", "model", "make", "state", 'images', "user", 'video_url', "type", "city", 'photo',  'year',"price", \
+        fields = [  'id', "title", "model", "make", "state", 'images', 'interior_images', 'exterior_images', "user", 'video_url', "type", "city", 'photo',  'year',"price", \
                   "mileage", "engine_capacity", "condition", "colour", "top_speed", \
                   'key_features', 'other_features', 'slug', \
                     "stock",  "horse_power", "airbag_quantity", "gears", ]
         
+
+    # def interior(self, obj):
+    #     return ImageSerializer(obj.images.filter(side="interior"))
+    
+    # def exterior(self, obj):
+    #     return ImageSerializer(obj.images.filter(side="exterior"))
+    
 class VehicleSerializerByUser(serializers.ModelSerializer):
     vehicles = VehicleSerializer(read_only=True, many=True)
 
