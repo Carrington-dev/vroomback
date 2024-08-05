@@ -5,8 +5,8 @@ from django.shortcuts import render
 from security.models import User
 from tradings.filters import VehicleModelFilter
 from tradings.mixins import VehicleMixin
-from tradings.seriliazers import CitySerializer, CountrySerializer, MakeSerializer, CarModelSerializer, StateSerializer, VehicleSerializer, VehicleSerializerByUser
-from tradings.models import CarModel, City, Country, Make, State, Vehicle
+from tradings.seriliazers import CitySerializer, CountrySerializer, EnquirySerializer, MakeSerializer, CarModelSerializer, StateSerializer, VehicleSerializer, VehicleSerializerByUser
+from tradings.models import CarModel, City, Country, Enquiry, Make, State, Vehicle
 from .mq import RabbitMQ
 from django.http import JsonResponse
 from vroomweb.settings import settings
@@ -118,6 +118,19 @@ class UserVehiclesModelViewSet(VehicleMixin):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
+
+
+class EnquiryViewSet(ModelViewSet):
+    serializer_class = EnquirySerializer
+    queryset = Enquiry.objects.all()
+
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 
 

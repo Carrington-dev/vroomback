@@ -1,12 +1,17 @@
 from rest_framework import serializers
 from security.models import User
-from tradings.models import CarModel, City, Country, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Enquiry, Country, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+
+class EnquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Enquiry
+        fields = [ "id", "vehicle", "full_name", "email", "phone", "message", ]
 
 class VehicleOtherFeaturesSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleOtherFeatures
         fields = [ "id", "induction", "cylinders", "wheels", "seats", "engine_config",\
-                  "valve_gear", "fuel_injection", "engine_size", "fuel_type", 'is_repaired'\
+                  "valve_gear", "fuel_injection", "engine_size", "fuel_type", 'is_repaired',\
                     "engine_location","power","torque","drive_type","global_safety_rating",\
                         "stearing_wheel","bluetooth","usb_port","remote_central_locking", \
                             'transmission', 'body_type']

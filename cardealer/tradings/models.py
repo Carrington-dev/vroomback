@@ -250,7 +250,7 @@ def save_key_features(sender, instance, **kwargs):
         instance.key_features.save()
 
 
-class Enguiry(models.Model):
+class Enquiry(models.Model):
     id = models.UUIDField( 
          primary_key = True, 
          default = uuid.uuid4, 
@@ -258,7 +258,7 @@ class Enguiry(models.Model):
     vehicle =  models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="inquires")
     full_name = models.CharField(max_length=300)
     email = models.EmailField(max_length=300)
-    phone = models.PhoneNumberField() 
+    phone = models.CharField(max_length=25) 
     message = models.TextField()
 
 

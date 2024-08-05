@@ -1,6 +1,6 @@
 from django.contrib import admin
 from tradings.actions import duplicate_event, mark_as_draft, mark_as_published
-from tradings.models import CarModel, City, Color, Country, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class ImageInline(admin.TabularInline):
     model = Image
@@ -44,6 +44,10 @@ class ImageAdmin(admin.ModelAdmin):
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
     list_display = ('name', 'country', 'id', )
+
+@admin.register(Enquiry)
+class EnquiryAdmin(admin.ModelAdmin):
+    list_display = [ "id", "vehicle", "full_name", "email", "phone", "message", ]
 
 
 @admin.register(City)
