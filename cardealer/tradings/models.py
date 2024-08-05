@@ -6,7 +6,7 @@ from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
-from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
+from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, IMAGE_CLASSES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
 from vroomweb.settings import settings
 
 class Country(models.Model):
@@ -219,6 +219,7 @@ class Image(models.Model):
          editable = False)
     vehicle = models.ForeignKey(Vehicle, related_name="images", on_delete=models.CASCADE)
     color = models.ForeignKey(Color, related_name="images", on_delete=models.CASCADE)
+    side = models.CharField(max_length=300, choices=IMAGE_CLASSES, default="interior")
     photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'], upload_to='car/photos/%Y/%m/%d/') # [1440, 1080]
 
     def __str__(self):
@@ -260,10 +261,14 @@ class Enquiry(models.Model):
     email = models.EmailField(max_length=300)
     phone = models.CharField(max_length=25) 
     message = models.TextField()
-
+    created_at          = models.DateTimeField(auto_now_add=True)
+    updated_at          = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.id} {self.full_name} {self.email}"
 
     def __unicode__(self):
         return f"{self.id} {self.full_name} {self.email}"
+
+    class Meta:
+        ordering = [ "-created_at" ]

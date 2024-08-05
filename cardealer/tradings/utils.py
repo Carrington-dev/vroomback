@@ -282,6 +282,12 @@ STATUS = (
     ('published', 'Published'),
 )
 
+IMAGE_CLASSES = (
+    ('interior', 'interior'),
+    ('exterior', 'exterior'),
+    ('colour', 'Colour'),
+)
+
 TYPE_OF_VEHICLE = (
     ('suv', 'SUV'),
     ('bus', 'Bus'),

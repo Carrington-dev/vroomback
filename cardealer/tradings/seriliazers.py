@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from security.models import User
-from tradings.models import CarModel, City, Enquiry, Country, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Enquiry, Country, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,6 +25,11 @@ class MakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
         fields = [ 'name', 'id' , ]
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = [ 'color', 'photo' , ]
 
 
 class CarMakeSerializer(serializers.PrimaryKeyRelatedField):
@@ -100,6 +105,7 @@ class VehicleSerializer(serializers.ModelSerializer):
     model = VehicleModelSerializer(read_only=True)
     city = VehicleCitySerializer(read_only=True)
     make = VehicleMakeSerializer(read_only=True)
+    images = ImageSerializer(many=True, read_only=True)
     # state = VehicleStateSerializer(queryset=State.objects.all())
     # model = VehicleModelSerializer(queryset=CarModel.objects.all())
     # city = VehicleCitySerializer(queryset=City.objects.all())
@@ -109,7 +115,7 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vehicle
-        fields = [  'id', "title", "model", "make", "state", "user", 'video_url', "type", "city", 'photo',  'year',"price", \
+        fields = [  'id', "title", "model", "make", "state", 'images', "user", 'video_url', "type", "city", 'photo',  'year',"price", \
                   "mileage", "engine_capacity", "condition", "colour", "top_speed", \
                   'key_features', 'other_features', 'slug', \
                     "stock",  "horse_power", "airbag_quantity", "gears", ]
