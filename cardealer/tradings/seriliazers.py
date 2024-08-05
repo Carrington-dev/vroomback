@@ -26,7 +26,13 @@ class MakeSerializer(serializers.ModelSerializer):
         model = Make
         fields = [ 'name', 'id' , ]
 
+class ColorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Make
+        fields = [ 'name', 'id' , ]
+
 class ImageSerializer(serializers.ModelSerializer):
+    color = ColorSerializer(read_only=True)
     class Meta:
         model = Image
         fields = [ 'color', 'photo' , 'id',]

@@ -37,7 +37,7 @@ mark_as_newcar.short_description = "Save selected vehicles as new"
 def mark_as_democar(self, request, queryset):
     queryset.update(condition="demo")
 
-mark_as_newcar.short_description = "Save selected vehicles as demo"
+mark_as_democar.short_description = "Save selected vehicles as demo"
 
 
 
