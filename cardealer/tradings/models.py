@@ -155,7 +155,7 @@ class Vehicle(models.Model):
     top_speed           = models.IntegerField(default=200)
     stock               = models.IntegerField(default=1)
     horse_power         = models.IntegerField(default=200)
-    photo               = ResizedImageField(size=[1440, 1080], crop=['middle', 'center'], default='vehicle/car.jpg', upload_to='vehicle/photos/%Y/%m/%d/')
+    photo               = ResizedImageField(size=[882, 484], crop=['middle', 'center'], default='vehicle/car.jpg', upload_to='vehicle/photos/%Y/%m/%d/')
     airbag_quantity     = models.IntegerField(default=5)
     gears               = models.IntegerField(default=4)
     description         = models.TextField(blank=True, null=True)
@@ -219,7 +219,7 @@ class Image(models.Model):
          editable = False)
     vehicle = models.ForeignKey(Vehicle, related_name="images", on_delete=models.CASCADE)
     color = models.ForeignKey(Color, related_name="images", on_delete=models.CASCADE)
-    photo = ResizedImageField(size=[1440, 1080], crop=['middle', 'center'], upload_to='car/photos/%Y/%m/%d/')
+    photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'], upload_to='car/photos/%Y/%m/%d/') # [1440, 1080]
 
     def __str__(self):
         return f"{self.vehicle.title}"
@@ -248,3 +248,22 @@ def create_key_features(sender, instance, created, **kwargs):
 @receiver(post_save, sender=Vehicle) 
 def save_key_features(sender, instance, **kwargs):
         instance.key_features.save()
+
+
+class Enguiry(models.Model):
+    id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False)
+    vehicle =  models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name="inquires")
+    full_name = models.CharField(max_length=300)
+    email = models.EmailField(max_length=300)
+    phone = models.PhoneNumberField() 
+    message = models.TextField()
+
+
+    def __str__(self):
+        return f"{self.id} {self.full_name} {self.email}"
+
+    def __unicode__(self):
+        return f"{self.id} {self.full_name} {self.email}"

@@ -60,6 +60,7 @@ class EnginePerformanceTemplate(models.Model):
     bluetooth                       = models.CharField(max_length=100, default="Standard")
     usb_port                        = models.CharField(max_length=100, default="Standard")
     remote_central_locking          = models.CharField(max_length=100, default="Standard")
+    is_repaired                     = models.BooleanField(default=False)
 
     class Meta:
         abstract = True

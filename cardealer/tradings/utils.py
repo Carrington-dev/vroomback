@@ -288,6 +288,7 @@ TYPE_OF_VEHICLE = (
     ('truck', 'Truck'),
     ('sedan', 'Sedan'),
     ('coupe', 'Coupe'),
+    ('bakkie', 'Bakkie'),
     ('minivan', 'Minivan'),
     ('crossover', 'Crossover'),
     ('hatchback', 'Hatchback'),

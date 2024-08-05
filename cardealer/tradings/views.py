@@ -78,6 +78,21 @@ class VehicleViewSet(VehicleMixin):
     @method_decorator(cache_page(60 * 15))
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
+    
+class FilteredVehicleViewSet(VehicleMixin):
+    serializer_class = VehicleSerializer
+    queryset = Vehicle.objects.filter(status='published')
+    filterset_class = VehicleModelFilter
+    # filterset_fields = ['title', 'model_name', 'model_make_name']
+
+
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 class CarModelViewSet(ModelViewSet):
     serializer_class = CarModelSerializer

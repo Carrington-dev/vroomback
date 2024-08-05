@@ -6,7 +6,7 @@ class VehicleOtherFeaturesSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleOtherFeatures
         fields = [ "id", "induction", "cylinders", "wheels", "seats", "engine_config",\
-                  "valve_gear", "fuel_injection", "engine_size", "fuel_type", \
+                  "valve_gear", "fuel_injection", "engine_size", "fuel_type", 'is_repaired'\
                     "engine_location","power","torque","drive_type","global_safety_rating",\
                         "stearing_wheel","bluetooth","usb_port","remote_central_locking", \
                             'transmission', 'body_type']
@@ -104,7 +104,7 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Vehicle
-        fields = [ "title", "model", "make", "state", "type", "city", 'photo',  'year',"price", \
+        fields = [  'id', "title", "model", "make", "state", "user", 'video_url', "type", "city", 'photo',  'year',"price", \
                   "mileage", "engine_capacity", "condition", "colour", "top_speed", \
                   'key_features', 'other_features', 'slug', \
                     "stock",  "horse_power", "airbag_quantity", "gears", ]
