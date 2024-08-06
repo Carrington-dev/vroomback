@@ -15,6 +15,7 @@ from rest_framework.viewsets import ModelViewSet
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Count
 
 class MakeVehiclesViewSet(ModelViewSet):
     serializer_class = MakeVehiclesSerializer
@@ -30,7 +31,8 @@ class MakeVehiclesViewSet(ModelViewSet):
 
 class MakeViewSet(ModelViewSet):
     serializer_class = MakeSerializer
-    queryset = Make.objects.all()
+    queryset = Make.objects.all().annotate(num_vehicles=Count('make_vehicles')).order_by('-num_vehicles')
+    
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):

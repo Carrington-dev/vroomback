@@ -24,7 +24,7 @@ class VehicleKeyFeaturesSerializer(serializers.ModelSerializer):
 class MakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
-        fields = [ 'name', 'id' , "icon" ]
+        fields = [ 'name', 'id' , "icon", "vehicle_count" ]
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -70,7 +70,7 @@ class StateSerializer(serializers.ModelSerializer):
 class VehicleMakeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Make
-        fields = [ 'name', 'id', "icon" ]
+        fields = [ 'name', 'id', "icon", "vehicle_count" ]
 
     def get_queryset(self):
         return Make.objects.all()
