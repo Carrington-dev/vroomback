@@ -24,6 +24,7 @@ class VehicleAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline
     ]
+    list_per_page = 20
 
     actions = [
         duplicate_event, mark_as_published, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar
@@ -38,7 +39,7 @@ class VehicleAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('vehicle', 'photo', 'id')
-
+    list_per_page = 20
     def photo(self, obj):
         return f"<img { obj.photo.url } height={200} width={150} />"
 
@@ -49,20 +50,22 @@ class StateAdmin(admin.ModelAdmin):
 @admin.register(Enquiry)
 class EnquiryAdmin(admin.ModelAdmin):
     list_display = [ "id", "vehicle", "full_name", "email", "phone", "message", ]
-
+    list_per_page = 20
 
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
     list_display = ('name', 'country' ,  'id', )
+    list_per_page = 20
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):
     list_display = ('name', 'id', 'hexadecimal',)
+    list_per_page = 20
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
     list_display = ('name', 'id', 'created_at', 'updated_at', )
-
+    list_per_page = 20
 
 @admin.register(VehicleKeyFeatures)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
@@ -73,7 +76,7 @@ class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
                         "blind_spot_System","multi_zone_climate_control","has_roof_rack",
                         "electronic_doors","has_security","push_start_button",    ]
     
-
+    list_per_page = 20
 
 
 @admin.register(VehicleOtherFeatures)
@@ -81,4 +84,4 @@ class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     list_display = [
         'vehicle', 'id'
     ]
-    
+    list_per_page = 20

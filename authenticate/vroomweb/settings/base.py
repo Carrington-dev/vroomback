@@ -115,11 +115,18 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
-    "https://www.example.com",
+    "https://*.*",
+    "https://*.*.*",
     "http://127.0.0.1:8000",
     "http://localhost:8000",
+    "http://localhost:*",
     
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:*',
+)
 
 AUTH_USER_MODEL = 'security.User'
 
@@ -140,6 +147,7 @@ DJOSER = {
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'LOGOUT_ON_PASSWORD_CHANGE': True,
+    # 'USER_CREATE_PASSWORD_RETYPE ': True,
     # 'USERNAME_RESET_SHOW_EMAIL_NOT_FOUND': True,
     'SERIALIZERS': {
         'user_create': 'security.serializers.UserCreateSerializer',
