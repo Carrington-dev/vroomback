@@ -176,9 +176,8 @@ class Vehicle(models.Model):
         return f"{self.title}"
     
     def save(self, *args, **kwargs):
-        # if not self.slug:
-        self.slug = slugify(self.title + "-" + str(self.id))
-        super().save()
+        new_car = super().save()
+        self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
     
     def interior_images(self):
