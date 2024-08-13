@@ -58,4 +58,6 @@ __Endpoints__
 ```bash
 # admin
 /clients
+
+to allow user to access /clients change is_staff to true
 ```
