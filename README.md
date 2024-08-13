@@ -51,3 +51,11 @@ forex.vroomhive.co.za
 auth.vroomhive.co.za
 # Just an idea
 ```
+
+## Car=Dealership
+
+__Endpoints__
+```bash
+# admin
+/clients
+```
