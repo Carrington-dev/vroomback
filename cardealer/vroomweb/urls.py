@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("tradings.urls")),
     path("api/v1/", include("security.urls")),
+
 ]
 
 

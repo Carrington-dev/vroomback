@@ -1,4 +1,14 @@
 from django.contrib import admin
+
+class ClientAdmin(admin.AdminSite):
+    site_header = "Vroomhive Pty Ltd"
+    site_title = "Vroomhive ADMIN PORTAL"
+    index_title = "Vroomhive welcomes you!!!"
+
+client_admin_site = ClientAdmin(name='client_admin')
+
+# @admin.register(Module, site=client_admin_site)
+from django.contrib import admin
 from django.utils.safestring import mark_safe
 from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
 from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
@@ -7,17 +17,9 @@ class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
 
-@admin.register(CarModel)
-class ModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id', 'make')
 
 
-@admin.register(Make)
-class MakeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id')
-
-
-@admin.register(Vehicle)
+@admin.register(Vehicle, site=client_admin_site)
 class VehicleAdmin(admin.ModelAdmin):
     list_display = [ "title", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
                     "stock", "horse_power",  'status_icon',  "created_at",]
@@ -37,7 +39,14 @@ class VehicleAdmin(admin.ModelAdmin):
     status_icon.short_description = ('Published')
     status_icon.boolean = True
 
-@admin.register(Image)
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(user=request.user)
+
+@admin.register(Image, site=client_admin_site)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('vehicle', 'photo_url', 'id')
     list_per_page = 20
@@ -45,31 +54,8 @@ class ImageAdmin(admin.ModelAdmin):
     def photo_url(self, obj):
         return mark_safe(f"<img src={ obj.photo.url } height={60} width={110} />")
 
-@admin.register(State)
-class StateAdmin(admin.ModelAdmin):
-    list_display = ('name', 'country', 'id', )
 
-@admin.register(Enquiry)
-class EnquiryAdmin(admin.ModelAdmin):
-    list_display = [ "id", "vehicle", "full_name", "email", "phone", "message", ]
-    list_per_page = 20
-
-@admin.register(City)
-class CityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'country' ,  'id', )
-    list_per_page = 20
-
-@admin.register(Color)
-class ColorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id', 'hexadecimal',)
-    list_per_page = 20
-
-@admin.register(Country)
-class CountryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id', 'created_at', 'updated_at', )
-    list_per_page = 20
-
-@admin.register(VehicleKeyFeatures)
+@admin.register(VehicleKeyFeatures, site=client_admin_site)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     list_display = [
                     'vehicle', "premium_pheel","sun_roof","premium_audio","navigation",\
@@ -81,7 +67,7 @@ class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     list_per_page = 20
 
 
-@admin.register(VehicleOtherFeatures)
+@admin.register(VehicleOtherFeatures, site=client_admin_site)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     list_display = [
         'vehicle', 'id'

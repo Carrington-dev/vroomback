@@ -1,5 +1,6 @@
 from django.urls import path, include
 from tradings import views
+from tradings import dashboard
 
 from rest_framework.routers import DefaultRouter
 
@@ -17,4 +18,6 @@ router.register('enquiries', viewset=views.EnquiryViewSet, basename='enquiry')
 urlpatterns = [
     # path('', views.send_message, name='send_message'),
     path('api/v1/', include(router.urls)),
+    path('clients/', dashboard.client_admin_site.urls),
+
 ]

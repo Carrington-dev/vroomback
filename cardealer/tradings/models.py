@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime
 from django.db import models
 from django.dispatch import receiver
+from tradings.helpers import user_directory_path, user_directory_path_image
 from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
@@ -141,7 +142,7 @@ class Vehicle(models.Model):
                             primary_key = True, 
                             default = uuid.uuid4, 
                             editable = False)
-    user                = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="vehicles", blank=True, null=True, on_delete=models.CASCADE)
+    user                = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="vehicles", on_delete=models.CASCADE)
     title               = models.CharField(max_length=254)
     model               = models.ForeignKey(CarModel, related_name="vehicles", on_delete=models.CASCADE)
     make                = models.ForeignKey(Make, related_name="make_vehicles", on_delete=models.CASCADE)
@@ -157,7 +158,7 @@ class Vehicle(models.Model):
     top_speed           = models.IntegerField(default=200)
     stock               = models.IntegerField(default=1)
     horse_power         = models.IntegerField(default=200)
-    photo               = ResizedImageField(size=[882, 484], crop=['middle', 'center'], default='vehicle/car.jpg', upload_to='vehicle/photos/%Y/%m/%d/')
+    photo               = ResizedImageField(size=[882, 484], crop=['middle', 'center'], default='vehicle/car.jpg', upload_to=user_directory_path)
     airbag_quantity     = models.IntegerField(default=5)
     gears               = models.IntegerField(default=4)
     description         = models.TextField(blank=True, null=True)
@@ -227,7 +228,7 @@ class Image(models.Model):
     vehicle = models.ForeignKey(Vehicle, related_name="images", on_delete=models.CASCADE)
     color = models.ForeignKey(Color, related_name="images", on_delete=models.CASCADE)
     side = models.CharField(max_length=300, choices=IMAGE_CLASSES, default="interior")
-    photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'], upload_to='car/photos/%Y/%m/%d/') # [1440, 1080]
+    photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'],  upload_to=user_directory_path_image)
 
     def __str__(self):
         return f"{self.vehicle.title}"
