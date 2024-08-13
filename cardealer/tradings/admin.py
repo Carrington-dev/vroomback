@@ -19,17 +19,16 @@ class MakeAdmin(admin.ModelAdmin):
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = [ "title", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
+    list_display = [ "title", "user", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
                     "stock", "horse_power",  'status_icon',  "created_at",]
     search_fields = ["title", "model__name", "airbag_quantity", "make__name", "state__name", "city__name", "slug", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", ]
+    actions = [ duplicate_event, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar ]
+    list_filter   = [ "user", "model__name", "make__name", "state__name", "city__name", "year"]
     inlines = [
         ImageInline
     ]
     list_per_page = 20
 
-    actions = [
-        duplicate_event, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar
-    ]
 
     def status_icon(self, obj):
         return obj.status == 'published'

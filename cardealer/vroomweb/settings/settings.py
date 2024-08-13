@@ -157,3 +157,4 @@ CACHES = {
     }
 }
 
+GRAPPELLI_ADMIN_TITLE = "Vroomhive" 
