@@ -61,3 +61,10 @@ __Endpoints__
 
 to allow user to access /clients change is_staff to true
 ```
+
+## Initial Commands
+
+```bash
+python manage.py create_countries letterhead
+python manage.py create_makes letterhead
+```

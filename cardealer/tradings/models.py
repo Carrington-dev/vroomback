@@ -18,7 +18,8 @@ class Country(models.Model):
                     editable = False)
     name       = models.CharField(max_length=254, unique=True, choices=COUNTRIES, default="ZA")
 
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
+    # created_at = models.DateTimeField(default=datetime.now, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -39,7 +40,7 @@ class Make(models.Model):
                 editable = False)
     name    = models.CharField(max_length=254, unique=True)
     icon       = models.FileField(upload_to="icons/%Y/%m/%d/", default="vehicle/tesla.svg", validators=[FileExtensionValidator(['svg'])])
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def vehicle_count(self):
@@ -66,7 +67,7 @@ class City(models.Model):
     state    = models.ForeignKey("State", related_name="cities", on_delete=models.SET_NULL, null=True, blank=True)
 
 
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -90,7 +91,7 @@ class State(models.Model):
     name = models.CharField(max_length=254, unique=True)
     country    = models.ForeignKey(Country, related_name="states", on_delete=models.SET_NULL, null=True, blank=True)
 
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -111,7 +112,7 @@ class Color(models.Model):
     hexadecimal = models.CharField(max_length=254, unique=True)
 
 
-    created_at = models.DateTimeField(default=datetime.now, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -169,7 +170,7 @@ class Vehicle(models.Model):
     type                = models.CharField(choices=TYPE_OF_VEHICLE, max_length=100, default='sedan')
     status              = models.CharField(choices=STATUS, max_length=100, default='draft')
     slug                = models.SlugField(max_length=250, default=uuid.uuid4, unique=True)
-    created_at          = models.DateTimeField(default=datetime.now, blank=True)
+    created_at          = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at          = models.DateTimeField(auto_now=True)
     
 

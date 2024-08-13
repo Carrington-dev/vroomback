@@ -81,7 +81,7 @@ COUNTRIES = [
         ('CO', 'Colombia') ,
         ('KM', 'Comoros') ,
         ('CG', 'Congo') ,
-        ('CD', 'Congo, The Democratic Republic Of') ,
+        ('CD', 'The Democratic Republic Of Congo') ,
         ('CK', 'Cook Islands') ,
         ('CR', 'Costa Rica') ,
         ('CI', "Cã”Te D'Ivoire") ,
