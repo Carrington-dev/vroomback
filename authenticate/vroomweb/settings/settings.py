@@ -1,9 +1,9 @@
 from .base import *
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'extras/www/static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'extras/www/media')
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'extras/www/assets') ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'extras/static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'extras/media')
+STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'extras/assets') ]
 
 
 CSRF_TRUSTED_ORIGINS = [

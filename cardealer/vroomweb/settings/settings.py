@@ -1,13 +1,14 @@
 
 import os
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
-SECRET_KEY = 'django-insecure-2g9rpap2x&j*_y$v%0i@m8%g2!*72inqf2*(dgpym$g$j9)f64'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config("DEBUG",  default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -65,12 +66,12 @@ WSGI_APPLICATION = 'vroomweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -140,8 +141,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'extra/media')
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'DEFAULT_PAGINATION_CLASS': 'tradings.pagination.VroomPagination',
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'tradings.pagination.VroomPagination',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20
 }
 
@@ -158,3 +159,14 @@ CACHES = {
 }
 
 GRAPPELLI_ADMIN_TITLE = "Vroomhive" 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+    }
+}
