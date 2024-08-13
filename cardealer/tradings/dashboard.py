@@ -21,7 +21,7 @@ class ImageInline(admin.TabularInline):
 
 @admin.register(Vehicle, site=client_admin_site)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = [ "title", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
+    list_display = [ "title", "user", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
                     "stock", "horse_power",  'status_icon',  "created_at",]
     search_fields = ["title", "model__name", "airbag_quantity", "make__name", "state__name", "city__name", "slug", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", ]
     inlines = [
@@ -42,8 +42,8 @@ class VehicleAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
+        # if request.user.is_superuser:
+        #     return qs
         return qs.filter(user=request.user)
 
 @admin.register(Image, site=client_admin_site)
@@ -54,7 +54,10 @@ class ImageAdmin(admin.ModelAdmin):
     def photo_url(self, obj):
         return mark_safe(f"<img src={ obj.photo.url } height={60} width={110} />")
 
-
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(vehicle__user=request.user)
+    
 @admin.register(VehicleKeyFeatures, site=client_admin_site)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     list_display = [
@@ -66,6 +69,10 @@ class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
     
     list_per_page = 20
 
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(vehicle__user=request.user)
+
 
 @admin.register(VehicleOtherFeatures, site=client_admin_site)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
@@ -73,3 +80,7 @@ class VehicleOtherFeaturesAdmin(admin.ModelAdmin):
         'vehicle', 'id'
     ]
     list_per_page = 20
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.filter(vehicle__user=request.user)
