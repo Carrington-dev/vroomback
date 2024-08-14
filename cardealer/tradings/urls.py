@@ -14,6 +14,7 @@ router.register('vehicles', viewset=views.VehicleViewSet, basename='vehicle')
 router.register('models', viewset=views.CarModelViewSet, basename='model')
 router.register('user_vehicles', viewset=views.UserVehiclesModelViewSet, basename='user_vehicle')
 router.register('enquiries', viewset=views.EnquiryViewSet, basename='enquiry')
+router.register('variants', viewset=views.VariantModelViewSet, basename='variant')
 
 urlpatterns = [
     # path('', views.send_message, name='send_message'),
