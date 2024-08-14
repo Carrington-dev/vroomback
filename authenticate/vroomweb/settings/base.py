@@ -153,6 +153,7 @@ DJOSER = {
     # 'USERNAME_RESET_SHOW_EMAIL_NOT_FOUND': True,
     'SERIALIZERS': {
         'user_create': 'security.serializers.UserCreateSerializer',
+        'current_user': 'security.serializers.UserCreateSerializer',
         'user': 'security.serializers.UserCreateSerializer',
         # 'user_create': 'djoser.serializers.UserCreateSerializer',
     },
