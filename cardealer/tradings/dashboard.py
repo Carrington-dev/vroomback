@@ -1,6 +1,5 @@
 from django.contrib import admin
 from tradings.utils import MAX_OBJECTS
-# @admin.register(Module, site=client_admin_site)
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
