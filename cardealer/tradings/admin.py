@@ -1,11 +1,19 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from tradings.utils import MAX_OBJECTS
 from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
 from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+
 
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
+
+    def has_add_permission(self, request, obj):
+        print(obj.images.count())
+        if obj.images.count() > MAX_OBJECTS:
+            return False
+        return True
 
 @admin.register(CarModel)
 class ModelAdmin(admin.ModelAdmin):
@@ -43,6 +51,14 @@ class ImageAdmin(admin.ModelAdmin):
 
     def photo_url(self, obj):
         return mark_safe(f"<img src={ obj.photo.url } height={60} width={110} />")
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):

@@ -303,3 +303,5 @@ TYPE_OF_VEHICLE = (
     ('pickuptruck', 'Pickup Truck'),
     ('stationwagon', 'Station Wagon'),
 )
+
+MAX_OBJECTS = 25

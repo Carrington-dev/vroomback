@@ -7,7 +7,7 @@ from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
-from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, IMAGE_CLASSES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
+from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, MAX_OBJECTS, FUEL_TYPES, COUNTRIES, IMAGE_CLASSES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
 from vroomweb import settings
 from django.core.validators import FileExtensionValidator
 
@@ -237,6 +237,14 @@ class Image(models.Model):
 
     def __unicode__(self):
         return f"{self.vehicle.title}"
+    
+    def has_add_permission(self, request):
+        if self.vehicle.images.objects.count() >= MAX_OBJECTS:
+            return False
+        return super().has_add_permission(request)
+        # if self.model.objects.count() >= MAX_OBJECTS:
+        #     return False
+        # return super().has_add_permission(request)
     
 # Create Vehicle Other Features For This Car on Vehicle creation
 
