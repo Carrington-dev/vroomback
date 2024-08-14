@@ -63,7 +63,7 @@ def remove_copy_on_title(modeladmin, request, queryset):
             try:
                 #obj = Vehicle.objects.get(pk=object.id)
                 obj = get_object_or_404(Vehicle, pk=object.id)
-                obj.title = str(object.title.replace("Copy", ""))
+                obj.title = str(object.title.replace("Copy", "")).strip()
                 obj.save()
                 messages.success(request, f"{object.title} has been updated.")
             except:

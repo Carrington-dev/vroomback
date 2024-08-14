@@ -48,7 +48,7 @@ class VariantAdmin(admin.ModelAdmin):
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
     list_display = [ "title", "user", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
-                    "stock", "horse_power",  'status_icon',  "created_at",]
+                    "stock", "horse_power",  'status_icon',  "created_at", 'photo_url']
     search_fields = ["title", "model__name", "airbag_quantity", "make__name", "state__name", "city__name", "slug", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", ]
     actions = [ duplicate_event, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar ]
     list_filter   = [ "user", "model__name", "make__name", "state__name", "city__name", "year"]
@@ -56,6 +56,11 @@ class VehicleAdmin(admin.ModelAdmin):
         ImageInline
     ]
     list_per_page = 20
+
+    def photo_url(self, obj):
+        print("main", obj.photo.url)
+        return mark_safe(f'<img src="{ obj.photo.url }" height={60} width={110} />')
+    
 
 
     def status_icon(self, obj):
@@ -70,6 +75,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     def photo_url(self, obj):
+        print("images", obj.photo.url)
         return mark_safe(f"<img src={ obj.photo.url } height={60} width={110} />")
     
     def has_add_permission(self, request):
