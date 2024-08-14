@@ -1,29 +1,43 @@
+from functools import cache
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from tradings.utils import MAX_OBJECTS
 from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
-from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
+
+class VariantInline(admin.TabularInline):
+    model = Variant
+    fields = ['model', 'name',]
+    extra = 0
 
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
 
     def has_add_permission(self, request, obj):
-        print(obj.images.count())
-        if obj.images.count() > MAX_OBJECTS:
+        if obj.images.count() >= MAX_OBJECTS:
             return False
         return True
 
 @admin.register(CarModel)
 class ModelAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id', 'make')
+    list_display = ('name', 'id', 'make', 'variants',)
+
+    inlines = [
+        VariantInline
+    ]
+
+    # @cache
+    def variants(self, obj):
+        return ", ".join([ variant.name for variant in obj.variants.all()])
 
 
 @admin.register(Make)
 class MakeAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 
+    
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):

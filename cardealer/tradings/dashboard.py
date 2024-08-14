@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from tradings.utils import MAX_OBJECTS
+
 class ClientAdmin(admin.AdminSite):
     site_header = "Vroomhive Pty Ltd"
     site_title = "Vroomhive ADMIN PORTAL"
@@ -16,6 +18,11 @@ from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make
 class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
+
+    def has_add_permission(self, request, obj):
+        if obj.images.count() >= MAX_OBJECTS:
+            return False
+        return True
 
 
 
@@ -57,6 +64,12 @@ class ImageAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         qs = super().get_queryset(request)
         return qs.filter(vehicle__user=request.user)
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
     
 @admin.register(VehicleKeyFeatures, site=client_admin_site)
 class VehicleOtherFeaturesAdmin(admin.ModelAdmin):

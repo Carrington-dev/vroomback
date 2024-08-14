@@ -138,6 +138,24 @@ class CarModel(models.Model):
         verbose_name_plural = 'Models'
         ordering = [ 'name' ]
 
+class Variant(models.Model):
+    id      = models.UUIDField( 
+                primary_key = True, 
+                default = uuid.uuid4, 
+                editable = False)
+    name    = models.CharField(max_length=254, unique=True)
+    model    = models.ForeignKey(CarModel, related_name="variants", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name}" 
+
+    def __unicode__(self):
+        return f"{self.name}"
+    
+    class Meta:
+        verbose_name = 'Variant'
+        verbose_name_plural = 'Variants'
+        ordering = [ 'name' ]
 
 class Vehicle(models.Model):
     id                  = models.UUIDField( 
