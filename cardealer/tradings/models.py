@@ -165,6 +165,7 @@ class Vehicle(models.Model):
     user                = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="vehicles", on_delete=models.CASCADE)
     title               = models.CharField(max_length=254)
     model               = models.ForeignKey(CarModel, related_name="vehicles", on_delete=models.CASCADE)
+    variant             = models.ForeignKey(Variant, related_name="variant", on_delete=models.CASCADE)
     make                = models.ForeignKey(Make, related_name="make_vehicles", on_delete=models.CASCADE)
     state               = models.ForeignKey(State, related_name="state_vehicles", on_delete=models.CASCADE)
     city                = models.ForeignKey(City, related_name="city_vehicles", on_delete=models.CASCADE)

@@ -39,6 +39,12 @@ class MakeAdmin(admin.ModelAdmin):
 
     
 
+@admin.register(Variant)
+class VariantAdmin(admin.ModelAdmin):
+    list_display = ('name', 'id')
+
+    
+
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
     list_display = [ "title", "user", "model", "make", "state", "city", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", 
