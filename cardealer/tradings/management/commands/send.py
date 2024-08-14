@@ -1,7 +1,7 @@
 import json
 from django.core.management.base import BaseCommand
 from tradings.mq import RabbitMQ
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 
 
 class Command(BaseCommand):

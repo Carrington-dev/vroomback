@@ -6,7 +6,7 @@ from rest_framework import status
 from security.models import User
 from security.mq import RabbitMQ
 from security.seriliazers import UserSerializer
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()

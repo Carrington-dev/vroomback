@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from security.mq import  RabbitMQ
-from vroomweb.settings import settings
+from authenticate.vroomweb.settings import local
 
 class Command(BaseCommand):
     help = 'Consumes messages from the specified queue'
@@ -15,5 +15,5 @@ class Command(BaseCommand):
         def callback(ch, method, properties, body):
             print(" [x] Received %r" % body)
 
-        publisher = RabbitMQ(**settings.RABBITMQ['default'])
+        publisher = RabbitMQ(**local.RABBITMQ['default'])
         publisher.recieve_message()

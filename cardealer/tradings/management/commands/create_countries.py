@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from tradings.utils import COUNTRIES
 from tradings.models import  City, Country, Make
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 
 class Command(BaseCommand):
     help = 'Consumes messages from the specified queue'

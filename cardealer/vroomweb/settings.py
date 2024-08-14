@@ -134,8 +134,6 @@ RABBITMQ = {
 
 AUTH_USER_MODEL = 'security.User'
 
-
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'extra/static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'extra/media')
 
@@ -169,4 +167,14 @@ DATABASES = {
         'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT'),
     }
+}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+    
 }

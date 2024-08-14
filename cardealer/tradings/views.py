@@ -10,7 +10,7 @@ from tradings.seriliazers import CitySerializer, CountrySerializer, EnquirySeria
 from tradings.models import CarModel, City, Country, Enquiry, Make, State, Vehicle
 from .mq import RabbitMQ
 from django.http import JsonResponse
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 from rest_framework.viewsets import ModelViewSet
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page

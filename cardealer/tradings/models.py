@@ -8,7 +8,7 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save, pre_delete
 from tradings.abstracts import EnginePerformanceTemplate, KeyFeatureTemplate
 from tradings.utils import CONDITION, DEFAULT_VIDEO_LINK, FUEL_TYPES, COUNTRIES, IMAGE_CLASSES, STATUS, TYPE_OF_VEHICLE, YEARS_TO_CHOOSE
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 from django.core.validators import FileExtensionValidator
 
 class Country(models.Model):

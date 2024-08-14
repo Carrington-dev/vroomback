@@ -68,3 +68,12 @@ to allow user to access /clients change is_staff to true
 python manage.py create_countries letterhead
 python manage.py create_makes letterhead
 ```
+
+## Tokens
+
+```bash
+curl -X GET http://127.0.0.1:8001/api/v1/auth/users/me/ -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzODA2MDExLCJpYXQiOjE3MjM2MzMyMTEsImp0aSI6IjNkODBlNDg0ZjY2YzQ3YzNiODgyZTIzODI0NDhhYzJkIiwidXNlcl9pZCI6ImI3MTlhNzMzLTNhOWYtNGQxMS05OWRiLWU2MGFiMDVhNGZjYiJ9.FkacsGZNsCAo0gh7HSYxcmb6ywvoTaCIVvCx3AE981c'
+
+
+curl -X GET -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNjMyNzE5LCJpYXQiOjE3MjM2MzI0MTksImp0aSI6IjRmYmFkYjRiOTFlNjQ3OWI5MzQ1MTVlNTI1NzcxNTRmIiwidXNlcl9pZCI6ImI3MTlhNzMzLTNhOWYtNGQxMS05OWRiLWU2MGFiMDVhNGZjYiJ9.21h3I0nzfptJQG5IwjQdz7bYa6lEw_--KzB7pWOmrto" "http://localhost:8001/api/v1/users/me"
+```

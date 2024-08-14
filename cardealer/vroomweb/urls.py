@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.urls import path, include
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("tradings.urls")),
     path("api/v1/", include("security.urls")),
+    path('api/v1/auth/', include('djoser.urls')),
+    path("api/v1/auth/", include("djoser.urls.jwt")),
 
 ]
 

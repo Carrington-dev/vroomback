@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from tradings.mq import  RabbitMQ, sender as publisher
-from vroomweb.settings import settings
+from cardealer.vroomweb import settings
 
 class Command(BaseCommand):
     help = 'Consumes messages from the specified queue'
