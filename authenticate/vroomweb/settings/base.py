@@ -6,12 +6,12 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = 'django-insecure-+dkecw3%isaq_8gbjzf9qhv2&nb46+9vm4nbq@u51qrc#rcsxg'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG",  default=True, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
     'security',
     'rest_framework',
+    'rest_framework_simplejwt',
     'djoser',
     'corsheaders',
 
@@ -157,14 +158,8 @@ DJOSER = {
     },
 }
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication', # session
-        'rest_framework.authentication.SessionAuthentication', # djoser token
-        'rest_framework_simplejwt.authentication.JWTAuthentication', # djoser jwt
-    )
-    
-}
+
+
 
 DATABASES = {
     'default': {
