@@ -79,8 +79,6 @@ class City(models.Model):
     class Meta:
         verbose_name = 'City'
         verbose_name_plural = 'Cities'
-
-    class Meta:
         ordering = [ 'name' ]
     
 class State(models.Model):
@@ -283,4 +281,6 @@ class Enquiry(models.Model):
         return f"{self.id} {self.full_name} {self.email}"
 
     class Meta:
+        verbose_name = 'Enquiry'
+        verbose_name_plural = 'Enquiries'
         ordering = [ "-created_at" ]
