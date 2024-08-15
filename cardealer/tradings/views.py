@@ -8,7 +8,7 @@ from tradings.filters import VehicleModelFilter
 from tradings.mixins import VehicleMixin
 from tradings.seriliazers import CitySerializer, CountrySerializer, EnquirySerializer, MakeSerializer, CarModelSerializer, MakeVehiclesSerializer, StateSerializer, VariantSerializer, VehicleSerializer, VehicleSerializerByUser
 from tradings.models import CarModel, City, Country, Enquiry, Make, State, Variant, Vehicle
-from .mq import RabbitMQ
+# from .mq import RabbitMQ
 from django.http import JsonResponse
 from vroomweb import settings
 from rest_framework.viewsets import ModelViewSet
