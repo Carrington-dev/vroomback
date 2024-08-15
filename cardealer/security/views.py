@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from security.models import User
-from security.mq import RabbitMQ
+# from security.mq import RabbitMQ
 from security.seriliazers import UserSerializer
 from vroomweb import settings
 
@@ -30,7 +30,7 @@ class UserViewSet(ModelViewSet):
         serializer = UserSerializer(user)
         # print("Passed", password)
 
-
+        """
 
         try:
             publisher = RabbitMQ(**settings.RABBITMQ['default'])
@@ -55,5 +55,5 @@ class UserViewSet(ModelViewSet):
         except Exception as e:
             print(e)
         
-        
+        """
         return value
