@@ -119,7 +119,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "https://*.*",
     "https://*.*.*",
+    "http://auth.vroomhive.co.za/",
+    "https://auth.vroomhive.co.za/",
     "http://127.0.0.1:8000",
+    "http://*.*.*.*/",
+    "https://*.*.*.*/",
     "http://localhost:8000",
     "http://localhost:*",
     
