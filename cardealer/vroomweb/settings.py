@@ -151,7 +151,7 @@ CACHES = {
     }
 }
 
-GRAPPELLI_ADMIN_TITLE = "Vroomhive" 
+GRAPPELLI_ADMIN_TITLE = "Vroomhive Pty Ltd" 
 
 DATABASES = {
     'default': {

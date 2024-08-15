@@ -197,3 +197,5 @@ SIMPLE_JWT = {
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',
 }
+
+GRAPPELLI_ADMIN_TITLE = "Vroomhive Pty Ltd" 
