@@ -23,6 +23,26 @@ This includes authentication with the following endpoints
 /forex/api/v1/forex/currencies/ZAR/
 
 ```
+
+## Vroomhive API 
+
+```bash
+#  Under nginx docker-compose
+
+{
+    "countries": "http://api.vroomhive.co.za/api/v1/countries/",
+    "cities": "http://api.vroomhive.co.za/api/v1/cities/",
+    "states": "http://api.vroomhive.co.za/api/v1/states/",
+    "makes": "http://api.vroomhive.co.za/api/v1/makes/",
+    "brands": "http://api.vroomhive.co.za/api/v1/brands/",
+    "vehicles": "http://api.vroomhive.co.za/api/v1/vehicles/",
+    "models": "http://api.vroomhive.co.za/api/v1/models/",
+    "user_vehicles": "http://api.vroomhive.co.za/api/v1/user_vehicles/",
+    "enquiries": "http://api.vroomhive.co.za/api/v1/enquiries/",
+    "variants": "http://api.vroomhive.co.za/api/v1/variants/"
+}
+
+```
 ## API-KEY Authentication
 
 Managed to add API-KEY authentication via X-Api-Key on headers. Also managed to add user authentication with token based authentication with djoser and simple-jwt on one simple container
@@ -47,7 +67,7 @@ docker-compose.yaml
 
 To explore using different domains/sub-domains for each service
 ```bash
-forex.vroomhive.co.za
+api.vroomhive.co.za
 auth.vroomhive.co.za
 # Just an idea
 ```
@@ -65,8 +85,8 @@ to allow user to access /clients change is_staff to true
 ## Initial Commands
 
 ```bash
-python manage.py create_countries letterhead
-python manage.py create_makes letterhead
+python manage.py create_countries 
+python manage.py create_makes 
 ```
 
 ## Tokens

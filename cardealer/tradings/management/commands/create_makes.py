@@ -1,15 +1,16 @@
 from django.core.management.base import BaseCommand
 from tradings.models import  Make
-from cardealer.vroomweb import settings
+from vroomweb import settings
 
 class Command(BaseCommand):
     help = 'Consumes messages from the specified queue'
 
     def add_arguments(self, parser):
-        parser.add_argument('letterhead', type=str, help='The name of the queue to consume messages from')
+        pass
+        # parser.add_argument('letterhead', type=str, help='The name of the queue to consume messages from')
 
     def handle(self, *args, **options):
-        queue_name = options['letterhead']
+        # queue_name = options['letterhead']
         # print(queue_name)
         with open(f"{settings.BASE_DIR}/makes.txt", ) as f:
             for line in f.readlines():
