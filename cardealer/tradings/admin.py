@@ -15,10 +15,10 @@ class ImageInline(admin.TabularInline):
     model = Image
     extra = 1
 
-    def has_add_permission(self, request, obj):
-        if obj.images.count() >= MAX_OBJECTS:
-            return False
-        return True
+    # def has_add_permission(self, request, obj):
+    #     if obj.images.count() >= MAX_OBJECTS:
+    #         return False
+    #     return True
 
 @admin.register(CarModel)
 class ModelAdmin(admin.ModelAdmin):
