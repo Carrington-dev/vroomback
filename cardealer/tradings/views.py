@@ -82,8 +82,9 @@ class CountryViewSet(ModelViewSet):
 class VehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer
     queryset = Vehicle.objects.filter(status='published')
+    # filter_backends = (filters.DjangoFilterBackend,)
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('make_id', 'condition')
+    filterset_fields = ('make_id', 'condition', "year")
     # filterset_fields = ['title', 'model_name', 'model_make_name']
 
 
