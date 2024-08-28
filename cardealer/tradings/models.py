@@ -40,6 +40,7 @@ class Make(models.Model):
                 editable = False)
     name    = models.CharField(max_length=254, unique=True)
     icon       = models.FileField(upload_to="icons/%Y/%m/%d/", default="vehicle/tesla.svg", validators=[FileExtensionValidator(['svg'])])
+    image       = models.FileField(upload_to="photos/",  default="vehicle/car_image.svg", validators=[FileExtensionValidator(['svg'])])
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
