@@ -16,7 +16,7 @@ class ImageInline(admin.TabularInline):
     extra = 1
 
     def has_add_permission(self, request, obj):
-        if obj.images.count() >= MAX_OBJECTS:
+        if obj is not None and obj.images.count() >= MAX_OBJECTS:
             return False
         return True
 
