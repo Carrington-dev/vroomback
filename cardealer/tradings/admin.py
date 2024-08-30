@@ -57,7 +57,7 @@ class VehicleAdmin(admin.ModelAdmin):
     ]
     list_editable = [ "type", "user", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
                       ]
-    list_per_page = 20
+    list_per_page = 40
 
     def photo_url(self, obj):
         print("main", obj.photo.url)
