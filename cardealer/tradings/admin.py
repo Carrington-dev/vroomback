@@ -56,7 +56,7 @@ class VehicleAdmin(admin.ModelAdmin):
         ImageInline
     ]
     list_editable = ["user", "model", "make", "state", "city", 'year', "price", "mileage", "type", "condition", "colour", "top_speed", 
-                    "stock", "horse_power",  'status_icon',]
+                    "stock", "horse_power",  ]
     list_per_page = 20
 
     def photo_url(self, obj):
