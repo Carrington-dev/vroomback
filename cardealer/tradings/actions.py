@@ -44,6 +44,13 @@ def mark_as_democar(self, request, queryset):
 mark_as_democar.short_description = "Save selected vehicles as demo"
 
 
+def mark_as_accidentcar(self, request, queryset):
+    queryset.update(condition="accident")
+    messages.success(request, f"Saved selected vehicles as accident")
+
+mark_as_accidentcar.short_description = "Save selected vehicles as accident vehicle"
+
+
 
 def mark_as_published(self, request, queryset):
     queryset.update(status="published")

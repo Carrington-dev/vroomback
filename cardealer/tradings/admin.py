@@ -2,7 +2,7 @@ from functools import cache
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 from tradings.utils import MAX_OBJECTS
-from tradings.actions import duplicate_event, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
+from tradings.actions import duplicate_event, mark_as_accidentcar, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
 from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 
@@ -50,12 +50,12 @@ class VehicleAdmin(admin.ModelAdmin):
     list_display = [ "title", "user", "type", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
                        'status_icon',  "created_at", 'photo_url']
     search_fields = ["title", 'type', "model__name", "airbag_quantity", "make__name", "state__name", "city__name", "slug", 'year', "price", "mileage", "engine_capacity", "condition", "colour", "top_speed", ]
-    actions = [ duplicate_event, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar ]
+    actions = [ duplicate_event, mark_as_published, mark_as_accidentcar, remove_copy_on_title, switch_to_default_thumbnail, mark_as_draft, mark_as_oldcar, mark_as_newcar, mark_as_democar ]
     list_filter   = [ "user", "model__name", "make__name", "state__name", "city__name", "year"]
     inlines = [
         ImageInline
     ]
-    list_editable = [ "type", "user", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
+    list_editable = [ "title", "type", "user", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
                       ]
     list_per_page = 40
 
