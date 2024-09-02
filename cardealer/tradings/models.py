@@ -71,6 +71,9 @@ class City(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def vehicle_count(self):
+        return self.city_vehicles.count()
+
     def __str__(self):
         return f"{self.name}" 
 
@@ -95,6 +98,9 @@ class State(models.Model):
 
     def __str__(self):
         return f"{self.name}" 
+    
+    def vehicle_count(self):
+        return self.state_vehicles.count()
 
     def __unicode__(self):
         return f"{self.name}"

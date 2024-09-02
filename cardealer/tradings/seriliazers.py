@@ -50,7 +50,7 @@ class CitySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = City
-        fields = [ 'name', 'id' , ]
+        fields = [ 'name', 'id' , 'vehicle_count' ]
 
 class VariantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,7 +69,7 @@ class StateSerializer(serializers.ModelSerializer):
     cities =  CitySerializer(many=True, read_only=True)
     class Meta:
         model = State
-        fields = [ 'name', 'id' , 'cities' ]
+        fields = [ 'name', 'id' , 'cities', 'vehicle_count' ]
 
 
 class VehicleMakeSerializer(serializers.ModelSerializer):
@@ -85,7 +85,9 @@ class VehicleMakeSerializer(serializers.ModelSerializer):
 class VehicleCitySerializer(serializers.ModelSerializer):
     class Meta:
         model = City
-        fields = [ 'name', ]
+        fields = [ 'name', 'vehicle_count' ]
+    
+    
 
 class VehicleModelSerializer(serializers.ModelSerializer):
     class Meta:
