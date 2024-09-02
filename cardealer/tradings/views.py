@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django_filters import rest_framework as filters
 
 from security.models import User
-from tradings.filters import VehicleModelFilter
+from tradings.filters import VehicleFilter, VehicleModelFilter
 from tradings.mixins import VehicleMixin
 from tradings.seriliazers import CitySerializer, CountrySerializer, EnquirySerializer, MakeSerializer, CarModelSerializer, MakeVehiclesSerializer, StateSerializer, VariantSerializer, VehicleSerializer, VehicleSerializerByUser
 from tradings.models import CarModel, City, Country, Enquiry, Make, State, Variant, Vehicle
@@ -86,15 +86,17 @@ class VehicleViewSet(VehicleMixin):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_fields = ('make_id', "city_id", 'condition', "user_id", "year", "type")
     # filterset_fields = ['title', 'model_name', 'model_make_name']
+    filterset_class = VehicleFilter
+    # list_display_links = None
 
 
-    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
-    def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+    # @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    # def list(self, request, *args, **kwargs):
+    #     return super().list(request, *args, **kwargs)
 
-    @method_decorator(cache_page(60 * 15))
-    def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+    # @method_decorator(cache_page(60 * 15))
+    # def retrieve(self, request, *args, **kwargs):
+    #     return super().retrieve(request, *args, **kwargs)
     
 class FilteredVehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer

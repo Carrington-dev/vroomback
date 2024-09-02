@@ -55,7 +55,8 @@ class VehicleAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline
     ]
-    list_editable = [ "title", "type", "user", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
+    list_display_links = ['title']
+    list_editable = [  "type", "user", "model", "make", "state", "city", 'year', "price", "mileage", "condition", "colour", "top_speed", 
                       ]
     list_per_page = 40
 
