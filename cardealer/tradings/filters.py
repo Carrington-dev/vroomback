@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 import django_filters
 from django_filters import rest_framework as filters
 from .models import City, Make, Vehicle
+from django.db.models import Q
 
 class VehicleModelFilter(filters.FilterSet):
     class Meta:
@@ -23,6 +24,7 @@ class VehicleFilter(filters.FilterSet):
     cities = filters.CharFilter(method='filter_by_cities')
     types = filters.CharFilter(method='filter_by_body_types')
     # years = filters.CharFilter(method='filter_by_years')
+    search = django_filters.CharFilter(method='filter_by_all_fields')
 
     price_gt = filters.NumberFilter(field_name="price", lookup_expr='gte')
     price_lt = filters.NumberFilter(field_name="price", lookup_expr='lte')
@@ -69,3 +71,7 @@ class VehicleFilter(filters.FilterSet):
     #     year_list = list(map(str, value.split(',')))
     #     return queryset.filter(year__in=year_list)
 
+    def filter_by_all_fields(self, queryset, name, value):
+        return queryset.filter(
+            Q(title__icontains=value) | Q(make__name__icontains=value)
+        )
