@@ -21,9 +21,10 @@ class VehicleModelFilter(filters.FilterSet):
 class VehicleFilter(filters.FilterSet):
     brands = filters.CharFilter(method='filter_by_brands')
     cities = filters.CharFilter(method='filter_by_cities')
+    # years = filters.CharFilter(method='filter_by_years')
 
-    price_gt = filters.NumberFilter(field_name="price", lookup_expr='gt')
-    price_lt = filters.NumberFilter(field_name="price", lookup_expr='lt')
+    price_gt = filters.NumberFilter(field_name="price", lookup_expr='gte')
+    price_lt = filters.NumberFilter(field_name="price", lookup_expr='lte')
 
     class Meta:
         model = Vehicle
@@ -31,11 +32,12 @@ class VehicleFilter(filters.FilterSet):
             # 'title': ['icontains'],
             # 'colour': ['exact', 'icontains'],
             'make_id': ['exact', ],
-            'year': ['exact', ],
+            # 'year': ['exact', ],
             "city_id": [ 'exact'],
             'condition': [ 'exact'],
             "user_id": [ 'exact'],
             "type": [ 'exact'],
+            'year': [ 'lte', 'gte'], 
             # 'price': [ 'lte'], 
             # 'price_lt': [ 'lt'],
 
@@ -56,4 +58,8 @@ class VehicleFilter(filters.FilterSet):
         city_list = [  get_object_or_404(City, pk=id) for id in city_list]
         # print(city_list)
         return queryset.filter(city__in=city_list)
+    
+    # def filter_by_years(self, queryset, name, value):
+    #     year_list = list(map(str, value.split(',')))
+    #     return queryset.filter(year__in=year_list)
 
