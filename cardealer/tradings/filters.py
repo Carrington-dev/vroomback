@@ -38,6 +38,7 @@ class VehicleFilter(filters.FilterSet):
             "user_id": [ 'exact'],
             "type": [ 'exact'],
             'year': [ 'lte', 'gte'], 
+            'mileage': [ 'lte', 'gte'], 
             # 'price': [ 'lte'], 
             # 'price_lt': [ 'lt'],
 
