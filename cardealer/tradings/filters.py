@@ -21,6 +21,7 @@ class VehicleModelFilter(filters.FilterSet):
 class VehicleFilter(filters.FilterSet):
     brands = filters.CharFilter(method='filter_by_brands')
     cities = filters.CharFilter(method='filter_by_cities')
+    types = filters.CharFilter(method='filter_by_body_types')
     # years = filters.CharFilter(method='filter_by_years')
 
     price_gt = filters.NumberFilter(field_name="price", lookup_expr='gte')
@@ -60,6 +61,10 @@ class VehicleFilter(filters.FilterSet):
         # print(city_list)
         return queryset.filter(city__in=city_list)
     
+    def filter_by_body_types(self, queryset, name, value):
+        body_type_list = list(map(str, value.split(',')))
+        return queryset.filter(type__in=body_type_list)
+
     # def filter_by_years(self, queryset, name, value):
     #     year_list = list(map(str, value.split(',')))
     #     return queryset.filter(year__in=year_list)
