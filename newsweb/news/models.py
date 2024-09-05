@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from news.utils import MAX_OBJECTS, user_directory_path_image
+from news.utils import MAX_OBJECTS, user_directory_path, user_directory_path_image
 from vroomweb import settings
 from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
@@ -24,7 +24,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=100, choices=STATUS, default="draft")
-    image = ResizedImageField(size=[1024, 768], crop=['middle', 'center'], upload_to='news/thumbnails')
+    image = ResizedImageField(size=[1024, 768], crop=['middle', 'center'], upload_to=user_directory_path, upload_to='news/thumbnails')
 
     def __str__(self):
         return f"{self.title} *{self.id}"
@@ -43,7 +43,7 @@ class Image(models.Model):
          primary_key = True, 
          default = uuid.uuid4, 
          editable = False)
-    post = models.ForeignKey(Post, related_name="images", on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="images",  on_delete=models.CASCADE)
     photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'],  upload_to=user_directory_path_image)
 
     def __str__(self):
