@@ -3,7 +3,7 @@ from django.urls import include, path
 from vroomweb import settings
 from django.conf.urls.static import static
 
-version = 'version'
+version = 'v1'
 
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
