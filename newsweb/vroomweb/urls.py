@@ -8,8 +8,8 @@ version = 'v1'
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path(f"api/{version}/", include("security.urls")),
     path(f"api/{version}/", include("news.urls")),
+    path(f"api/{version}/news/auth/", include("security.urls")),
     path(f'api/{version}/auth/', include('djoser.urls')),
     path(f"api/{version}/auth/", include("djoser.urls.jwt")),
 

@@ -1,3 +1,8 @@
 from django.contrib import admin
+from news.models import Image, Post
 
-# Register your models here.
+@admin.register(Post)
+class PostAdmin(admin.ModelAdmin):
+    list_display = [ 'id' ,'author' ,'title' ,  'short_description' ,'content' ,'image']
+
+

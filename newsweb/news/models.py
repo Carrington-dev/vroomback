@@ -24,7 +24,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=100, choices=STATUS, default="draft")
-    image = ResizedImageField(size=[1024, 768], crop=['middle', 'center'], upload_to=user_directory_path, ) #upload_to='news/thumbnails')
+    image = ResizedImageField(size=[1024, 768], crop=['middle', 'center'], default='post/post.jpg', upload_to=user_directory_path, ) #upload_to='news/thumbnails')
 
     def __str__(self):
         return f"{self.title} *{self.id}"
@@ -33,7 +33,7 @@ class Post(models.Model):
         return f"{self.title} *{self.id}"
     
     def save(self, *args, **kwargs):
-        new_post = super().save()
+        # new_post = super().save()
         self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
 
