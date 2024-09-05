@@ -3,12 +3,15 @@ from django.urls import include, path
 from vroomweb import settings
 from django.conf.urls.static import static
 
+version = 'version'
+
 urlpatterns = [
     path('grappelli/', include('grappelli.urls')),
     path('admin/', admin.site.urls),
-    path("api/v1/", include("security.urls")),
-    path('api/v1/auth/', include('djoser.urls')),
-    path("api/v1/auth/", include("djoser.urls.jwt")),
+    path(f"api/{version}/", include("security.urls")),
+    path(f"api/{version}/", include("news.urls")),
+    path(f'api/{version}/auth/', include('djoser.urls')),
+    path(f"api/{version}/auth/", include("djoser.urls.jwt")),
 
 ]
 
