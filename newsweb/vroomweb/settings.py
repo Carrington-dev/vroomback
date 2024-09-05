@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     # 'django_rabbitmq',
     'corsheaders',
     'django_filters',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
