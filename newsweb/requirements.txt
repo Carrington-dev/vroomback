@@ -1,5 +1,9 @@
 django
 djangorestframework
-djangorestframework
-python-decouple
+django-resized==1.0.2
 djoser
+django-cors-headers
+django-filter
+psycopg2-binary
+python-decouple
+gunicorn
