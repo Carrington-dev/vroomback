@@ -23,9 +23,11 @@ INSTALLED_APPS = [
     'security',
     'news',
     # 'django_rabbitmq',
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'djoser',
     'corsheaders',
     'django_filters',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
