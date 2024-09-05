@@ -1,6 +1,6 @@
 import uuid
 from django.db import models
-from news.utils import MAX_OBJECTS
+from news.utils import MAX_OBJECTS, user_directory_path_image
 from vroomweb import settings
 from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
