@@ -1,6 +1,6 @@
 from django.contrib import admin
-from news.actions import duplicate_post, mark_as_draft
 from news.models import Image, Post
+from news.actions import duplicate_post, mark_as_draft, mark_as_published
 
 class ImageInline(admin.TabularInline):
     model = Image
@@ -11,5 +11,5 @@ class ImageInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = [ 'id' ,'author' ,'title' ,  'short_description' ,'content' ,'image']
     inlines = [ ImageInline ]
-    actions = [ duplicate_post, mark_as_draft ]
+    actions = [ duplicate_post, mark_as_draft, mark_as_published ]
 
