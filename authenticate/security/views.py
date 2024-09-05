@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from security.models import User
-from authenticate.security.serializers import UserCreateSerializer
+from security.serializers import UserCreateSerializer
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
