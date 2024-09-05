@@ -15,3 +15,9 @@ def duplicate_post(modeladmin, request, queryset):
                 pass
 
 duplicate_post.short_description = "Duplicate selected posts"
+
+def mark_as_draft(self, request, queryset):
+    queryset.update(status="draft")
+    messages.success(request, f"Saved selected posts as draft")
+
+mark_as_draft.short_description = "Save selected posts as draft"
