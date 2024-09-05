@@ -30,3 +30,8 @@ class News(models.Model):
 
     def __unicode__(self):
         return f"{self.title} *{self.id}"
+    
+    def save(self, *args, **kwargs):
+        new_post = super().save()
+        self.slug = slugify(f"{self.title}-{self.id}")
+        return super().save(*args, **kwargs)
