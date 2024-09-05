@@ -1,4 +1,5 @@
 from django.contrib import admin
+from news.actions import duplicate_post
 from news.models import Image, Post
 
 class ImageInline(admin.TabularInline):
@@ -10,4 +11,5 @@ class ImageInline(admin.TabularInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = [ 'id' ,'author' ,'title' ,  'short_description' ,'content' ,'image']
     inlines = [ ImageInline ]
+    actions = [ duplicate_post ]
 
