@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'security',
+    'news',
     # 'django_rabbitmq',
     'corsheaders',
     'django_filters',
