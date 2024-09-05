@@ -205,7 +205,6 @@ class Vehicle(models.Model):
         return f"{self.title}"
     
     def save(self, *args, **kwargs):
-        new_car = super().save()
         self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
     
