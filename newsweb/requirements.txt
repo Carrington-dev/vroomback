@@ -1,6 +1,7 @@
 django
 djangorestframework
 django-resized==1.0.2
+django-grappelli
 pillow
 djoser
 django-cors-headers
