@@ -21,3 +21,10 @@ def mark_as_draft(self, request, queryset):
     messages.success(request, f"Saved selected posts as draft")
 
 mark_as_draft.short_description = "Save selected posts as draft"
+
+
+def mark_as_published(self, request, queryset):
+    queryset.update(status="published")
+    messages.success(request, f"Marked selected vehicles as published")
+
+mark_as_published.short_description = "Mark selected vehicles as published"
