@@ -1,0 +1,1 @@
+MAX_OBJECTS = 20

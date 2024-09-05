@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from news.utils import MAX_OBJECTS
 from vroomweb import settings
 from django_resized import ResizedImageField
 from django.template.defaultfilters import slugify
@@ -10,7 +11,7 @@ STATUS = (
     ('draft', 'Draft'),
     ('published', 'Published'),
 )
-class News(models.Model):
+class Post(models.Model):
     id = models.UUIDField( 
          primary_key = True, 
          default = uuid.uuid4, 
@@ -35,3 +36,23 @@ class News(models.Model):
         new_post = super().save()
         self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
+
+
+class Image(models.Model):
+    id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False)
+    post = models.ForeignKey(Post, related_name="images", on_delete=models.CASCADE)
+    photo = ResizedImageField(size=[882, 484], crop=['middle', 'center'],  upload_to=user_directory_path_image)
+
+    def __str__(self):
+        return f"{self.post.title}"
+
+    def __unicode__(self):
+        return f"{self.vehicle.title}"
+    
+    def has_add_permission(self, request):
+        if self.vehicle.images.objects.count() >= MAX_OBJECTS:
+            return False
+        return super().has_add_permission(request)
