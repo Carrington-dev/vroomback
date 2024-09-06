@@ -67,7 +67,7 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
     
     class Meta:
-        ordering = ['created_at', 'title']
+        ordering = ['-created_at', 'title']
 
 
 class Image(models.Model):
