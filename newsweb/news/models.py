@@ -65,6 +65,9 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
+    
+    class Meta:
+        ordering = ['created_at', 'title']
 
 
 class Image(models.Model):
