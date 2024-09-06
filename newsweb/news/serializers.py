@@ -1,5 +1,5 @@
-from news.models import Image, Post
 from rest_framework import serializers
+from news.models import Image, Post, Category
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -14,10 +14,16 @@ class ImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = [ 'id' , 'photo']
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = [ 'id' , 'name']
+
 class PostSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
     author = UserSerializer(read_only=True)
+    category = CategorySerializer(read_only=True)
     
     class Meta:
         model = Post
-        fields = [ 'id' ,'author' ,'title' , 'slug',  'short_description' ,'content' , 'created_at','image', 'images',]
+        fields = [ 'id' ,'author', 'category' ,'title' , 'slug',  'short_description' ,'content' , 'created_at','image', 'images',]
