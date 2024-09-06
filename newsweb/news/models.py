@@ -11,11 +11,41 @@ STATUS = (
     ('draft', 'Draft'),
     ('published', 'Published'),
 )
+
+class Category(models.Model):
+    id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False)
+    name = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.name} *{self.id}"
+
+    def __unicode__(self):
+        return f"{self.name} *{self.id}"
+    
+class Tag(models.Model):
+    id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False)
+    name = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f"{self.name} *{self.id}"
+
+    def __unicode__(self):
+        return f"{self.name} *{self.id}"
+
+
 class Post(models.Model):
     id = models.UUIDField( 
          primary_key = True, 
          default = uuid.uuid4, 
          editable = False)
+    category = models.ForeignKey('Category', related_name='posts', on_delete=models.CASCADE, blank=True, null=True)
+    tags = models.ManyToManyField('Tag', related_name='posts', blank=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="news")
     title = models.CharField(max_length=500)
     short_description = models.TextField()
