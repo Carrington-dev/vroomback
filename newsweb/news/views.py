@@ -1,6 +1,6 @@
 from news.models import Category, Post
 from news.mixins import PostListReadMixin
-from news.serializers import PostSerializer
+from news.serializers import CategorySerializer, PostSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -18,7 +18,7 @@ class PostViewSet(PostListReadMixin):
         return super().retrieve(request, *args, **kwargs)
     
 class CategoryViewSet(PostListReadMixin):
-    serializer_class = PostSerializer
+    serializer_class = CategorySerializer
     queryset = Category.objects.all()
     model = Category
 
