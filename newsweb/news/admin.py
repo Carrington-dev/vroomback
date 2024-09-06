@@ -20,4 +20,5 @@ class PostAdmin(admin.ModelAdmin):
     list_display = [ 'id' ,'author' ,'title' ,  'short_description' ,'content' ,'image']
     inlines = [ ImageInline ]
     actions = [ duplicate_post, mark_as_draft, mark_as_published ]
+    ordering = ['-created_at', 'title']
 
