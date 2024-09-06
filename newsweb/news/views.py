@@ -1,6 +1,6 @@
-from news.models import Category, Post
+from news.models import Category, Post, Tag
 from news.mixins import PostListReadMixin
-from news.serializers import CategorySerializer, PostSerializer
+from news.serializers import CategorySerializer, PostSerializer, TagSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 
@@ -21,6 +21,19 @@ class CategoryViewSet(PostListReadMixin):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
     model = Category
+
+    @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @method_decorator(cache_page(60 * 15))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+    
+class TagViewSet(PostListReadMixin):
+    serializer_class = TagSerializer
+    queryset = Tag.objects.all()
+    model = Tag
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
