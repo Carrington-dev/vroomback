@@ -89,6 +89,12 @@ python manage.py create_countries
 python manage.py create_makes 
 ```
 
+```bash
+authgunicorn -> auth.vroomhive.co.za
+newsgunicorn -> news.vroomhive.co.za
+gunicorn -> api.vroomhive.co.za
+```
+
 ## Tokens
 
 ```bash
