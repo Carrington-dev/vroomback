@@ -25,6 +25,5 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     def photo_url(self, obj):
-        print("main", obj.photo.url)
-        return mark_safe(f'<img src="{ obj.photo.url }" height={60} width={110} />')
+        return mark_safe(f'<img src="{ obj.image.url }" height={60} width={110} />')
 
