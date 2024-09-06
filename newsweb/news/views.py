@@ -3,11 +3,14 @@ from news.mixins import PostListReadMixin
 from news.serializers import CategorySerializer, PostSerializer, TagSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django_filters import rest_framework as filters
 
 class PostViewSet(PostListReadMixin):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     model = Post
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('category_id', )
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
