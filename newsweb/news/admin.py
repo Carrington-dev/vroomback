@@ -21,4 +21,5 @@ class PostAdmin(admin.ModelAdmin):
     inlines = [ ImageInline ]
     actions = [ duplicate_post, mark_as_draft, mark_as_published ]
     ordering = ['-created_at', 'title']
+    list_per_page = 20
 
