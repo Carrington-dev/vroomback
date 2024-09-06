@@ -25,6 +25,10 @@ class Category(models.Model):
     def __unicode__(self):
         return f"{self.name} *{self.id}"
     
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+    
 class Tag(models.Model):
     id = models.UUIDField( 
          primary_key = True, 
@@ -67,6 +71,7 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
     
     class Meta:
+        
         ordering = ['-created_at', 'title']
 
 
