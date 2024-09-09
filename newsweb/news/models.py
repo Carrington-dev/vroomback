@@ -73,6 +73,10 @@ class Post(models.Model):
         self.slug = slugify(f"{self.title}-{self.id}")
         return super().save(*args, **kwargs)
     
+    def  previous_post(self):
+        return Post.objects.filter(created_at__lt=post.created_at).order_by('-created_at').first()
+    
+    
     class Meta:
         
         ordering = ['-created_at', 'title']
