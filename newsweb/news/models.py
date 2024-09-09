@@ -74,7 +74,9 @@ class Post(models.Model):
         return super().save(*args, **kwargs)
     
     def  previous_post(self):
-        return Post.objects.filter(created_at__lt=post.created_at).order_by('-created_at').first()
+        return Post.objects.filter(created_at__lt=self.created_at).order_by('-created_at').first()
+    
+
     
     
     class Meta:
