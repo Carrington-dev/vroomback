@@ -24,7 +24,7 @@ class ImageSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = [ 'id' , 'name']
+        fields = [ 'id' , 'name', 'post_count']
 
 class PostSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
@@ -33,4 +33,4 @@ class PostSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Post
-        fields = [ 'id' ,'author', 'category' ,'title' , 'slug',  'short_description' ,'content' , 'created_at','image', 'images',]
+        fields = [ 'id' ,'author', 'category' , 'title' , 'slug',  'short_description' ,'content' , 'created_at','image', 'images',]

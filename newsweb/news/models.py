@@ -19,6 +19,9 @@ class Category(models.Model):
          editable = False)
     name = models.CharField(max_length=500)
 
+    def post_count(self):
+        return self.posts.count()
+
     def __str__(self):
         return f"{self.name} *{self.id}"
 
