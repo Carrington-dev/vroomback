@@ -98,9 +98,9 @@ class Image(models.Model):
         return f"{self.post.title}"
 
     def __unicode__(self):
-        return f"{self.vehicle.title}"
+        return f"{self.post.title}"
     
     def has_add_permission(self, request):
-        if self.vehicle.images.objects.count() >= MAX_OBJECTS:
+        if self.post.images.objects.count() >= MAX_OBJECTS:
             return False
         return super().has_add_permission(request)
