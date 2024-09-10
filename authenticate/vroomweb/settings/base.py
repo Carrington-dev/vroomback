@@ -201,3 +201,5 @@ SIMPLE_JWT = {
 }
 
 GRAPPELLI_ADMIN_TITLE = "Vroomhive Pty Ltd" 
+DOMAIN = "vroomhive.co.za"
+SITE_NAME = "Vroomhive"
