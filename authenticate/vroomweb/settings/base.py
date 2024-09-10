@@ -141,9 +141,9 @@ STATICFILES_DIRS = [
 
 
 DJOSER = {
-    'PASSWORD_RESET_CONFIRM_URL': 'secrets/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': 'secrets/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'secrets/activate/{uid}/{token}',
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
+    'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
@@ -159,6 +159,15 @@ DJOSER = {
         'user': 'security.serializers.UserCreateSerializer',
         # 'user_create': 'djoser.serializers.UserCreateSerializer',
     },
+
+    'EMAIL': {
+        'activation': 'djoser.email.ActivationEmail',
+        'confirmation': 'djoser.email.ConfirmationEmail',
+        'password_reset': 'djoser.email.PasswordResetEmail',
+        'password_changed_confirmation': 'djoser.email.PasswordChangedConfirmationEmail',
+        'username_changed_confirmation': 'djoser.email.UsernameChangedConfirmationEmail',
+        'username_reset': 'djoser.email.UsernameResetEmail',
+    }
 }
 
 
@@ -203,3 +212,4 @@ SIMPLE_JWT = {
 GRAPPELLI_ADMIN_TITLE = "Vroomhive Pty Ltd" 
 DOMAIN = "vroomhive.co.za"
 SITE_NAME = "Vroomhive"
+SITE_ID = 1
