@@ -156,10 +156,10 @@ class VehicleSerializerByUser(serializers.ModelSerializer):
 
 
 class MakeVehiclesSerializer(serializers.ModelSerializer):
-    make_vehicles = VehicleSerializer(many=True)
+    # make_vehicles = VehicleSerializer(many=True)
     class Meta:
         model = Make
-        fields = [ 'name', 'id', "make_vehicles" ]
+        fields = [ 'name', 'id', ]
 
     def get_queryset(self):
         return Make.objects.all()
