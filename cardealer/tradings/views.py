@@ -21,6 +21,8 @@ from django.db.models import Count
 class MakeVehiclesViewSet(ModelViewSet):
     serializer_class = MakeVehiclesSerializer
     queryset = Make.objects.all()
+    pagination_class = CustomBrandPagination
+
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
@@ -126,7 +128,6 @@ class CarModelViewSet(ModelViewSet):
 class UserVehiclesModelViewSet(VehicleMixin):
     serializer_class = VehicleSerializerByUser
     queryset = User.objects.all()
-    pagination_class = CustomBrandPagination
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
