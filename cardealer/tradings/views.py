@@ -1,6 +1,7 @@
 import json
 import datetime
 from django.shortcuts import render
+from tradings.pagination import CustomBrandPagination
 from django_filters import rest_framework as filters
 
 from security.models import User
@@ -125,6 +126,7 @@ class CarModelViewSet(ModelViewSet):
 class UserVehiclesModelViewSet(VehicleMixin):
     serializer_class = VehicleSerializerByUser
     queryset = User.objects.all()
+    pagination_class = CustomBrandPagination
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
