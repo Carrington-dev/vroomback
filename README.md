@@ -103,3 +103,21 @@ curl -X GET http://127.0.0.1:8001/api/v1/auth/users/me/ -H 'Authorization: Beare
 
 curl -X GET -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIzNjMyNzE5LCJpYXQiOjE3MjM2MzI0MTksImp0aSI6IjRmYmFkYjRiOTFlNjQ3OWI5MzQ1MTVlNTI1NzcxNTRmIiwidXNlcl9pZCI6ImI3MTlhNzMzLTNhOWYtNGQxMS05OWRiLWU2MGFiMDVhNGZjYiJ9.21h3I0nzfptJQG5IwjQdz7bYa6lEw_--KzB7pWOmrto" "http://localhost:8001/api/v1/users/me"
 ```
+
+## Understand DBshell
+```bash
+python manage.py dbshell
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE TABLE news_contact (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(), -- Requires the `uuid-ossp` extension
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(300) NOT NULL,
+    phone VARCHAR(30) NOT NULL,
+    notes TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+```
