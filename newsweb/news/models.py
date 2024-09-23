@@ -104,3 +104,25 @@ class Image(models.Model):
         if self.post.images.objects.count() >= MAX_OBJECTS:
             return False
         return super().has_add_permission(request)
+    
+
+class Contact(models.Model):
+    id = models.UUIDField( 
+         primary_key = True, 
+         default = uuid.uuid4, 
+         editable = False)
+   
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    subject = models.CharField(max_length=300)
+    phone = models.CharField(max_length=30)
+    notes = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.email}"
+
+    def __unicode__(self):
+        return f"{self.email}"
+    
