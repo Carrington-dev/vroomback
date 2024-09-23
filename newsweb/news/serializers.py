@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from news.models import Image, Post, Category, Tag
+from news.models import Contact, Image, Post, Category, Tag
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -31,6 +31,11 @@ class NewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [ 'id' ,'author', 'category' , 'title' , 'slug', 'created_at',]
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = [ 'id' , 'name', 'email', 'subject', 'phone', 'notes',]
 
 
 class PostSerializer(serializers.ModelSerializer):
