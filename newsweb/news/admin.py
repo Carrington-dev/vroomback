@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from news.models import Category, Image, Post, Tag
+from news.models import Category, Contact, Image, Post, Tag
 from news.actions import duplicate_post, mark_as_draft, mark_as_published
 
 class ImageInline(admin.TabularInline):
@@ -15,6 +15,10 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [ 'id' , 'name']
+
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = [ 'id' , 'name', 'email', 'subject', 'phone', 'notes',]
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
