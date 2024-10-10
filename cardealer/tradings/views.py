@@ -20,7 +20,7 @@ from django.db.models import Count
 
 class MakeVehiclesViewSet(ModelViewSet):
     serializer_class = MakeVehiclesSerializer
-    queryset = Make.objects.all()
+    queryset = Make.objects.all().annotate(num_vehicles=Count('make_vehicles')).order_by('-num_vehicles')
     pagination_class = CustomBrandPagination
 
 
