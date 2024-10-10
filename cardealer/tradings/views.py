@@ -59,7 +59,7 @@ class StateViewSet(ModelViewSet):
 
 class CityViewSet(ModelViewSet):
     serializer_class = CitySerializer
-    queryset = City.objects.all()
+    queryset = City.objects.all().annotate(num_vehicles=Count('city_vehicles')).order_by('-num_vehicles')
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
