@@ -115,7 +115,7 @@ class FilteredVehicleViewSet(VehicleMixin):
 
 class CarModelViewSet(ModelViewSet):
     serializer_class = CarModelSerializer
-    queryset = CarModel.objects.all()
+    queryset = CarModel.objects.all().annotate(num_vehicles=Count('vehicles')).order_by('-num_vehicles')
 
     @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     def list(self, request, *args, **kwargs):
