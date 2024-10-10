@@ -86,7 +86,7 @@ class VehicleViewSet(VehicleMixin):
     serializer_class = VehicleSerializer
     queryset = Vehicle.objects.filter(status='published')
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ('make_id', "city_id", 'condition', "user_id", "year", "type")
+    filterset_fields = ('make_id','model_id', "city_id", 'condition', "user_id", "year", "type")
     filterset_class = VehicleFilter
 
 

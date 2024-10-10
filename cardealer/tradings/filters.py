@@ -34,6 +34,7 @@ class VehicleFilter(filters.FilterSet):
         fields = {
             # 'title': ['icontains'],
             # 'colour': ['exact', 'icontains'],
+            'model_id': ['exact', ],
             'make_id': ['exact', ],
             # 'year': ['exact', ],
             "city_id": [ 'exact'],
