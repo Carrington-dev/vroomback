@@ -62,7 +62,7 @@ class CarModelSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = CarModel
-        fields = [ 'name', 'id' ,  'make']
+        fields = [ 'name', 'id' ,  'make', 'vehicle_count']
 
 
 class StateSerializer(serializers.ModelSerializer):
