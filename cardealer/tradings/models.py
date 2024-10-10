@@ -145,6 +145,9 @@ class CarModel(models.Model):
         verbose_name_plural = 'Models'
         ordering = [ 'name' ]
 
+    def vehicle_count(self):
+        return self.vehicles.count()
+
 class Variant(models.Model):
     id      = models.UUIDField( 
                 primary_key = True, 
