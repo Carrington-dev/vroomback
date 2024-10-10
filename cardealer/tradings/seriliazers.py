@@ -93,6 +93,7 @@ class VehicleModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarModel
         fields = [ 'name',   ]
+        
     def get_queryset(self):
         return CarModel.objects.all()
 
