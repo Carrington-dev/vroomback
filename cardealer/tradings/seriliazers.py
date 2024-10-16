@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from security.models import User
-from tradings.models import CarModel, City, Color, Enquiry, Country, Image, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Color, Enquiry, Country, Image, Like, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 class EnquirySerializer(serializers.ModelSerializer):
     class Meta:
@@ -164,3 +164,12 @@ class MakeVehiclesSerializer(serializers.ModelSerializer):
 
     def get_queryset(self):
         return Make.objects.all()
+    
+class LikeSerializer(serializers.ModelSerializer):
+    # make_vehicles = VehicleSerializer(many=True)
+    class Meta:
+        model = Like
+        fields = [ 'vehicle', 'user', ]
+
+    def get_queryset(self):
+        return Like.objects.all()
