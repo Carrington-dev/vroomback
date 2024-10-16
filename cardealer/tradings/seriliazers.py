@@ -169,7 +169,7 @@ class LikeSerializer(serializers.ModelSerializer):
     # make_vehicles = VehicleSerializer(many=True)
     class Meta:
         model = Like
-        fields = [ 'vehicle', 'user', ]
+        fields = [ "id", 'vehicle', 'user', ]
 
     def get_queryset(self):
         return Like.objects.all()
