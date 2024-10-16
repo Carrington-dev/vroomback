@@ -41,7 +41,7 @@ class MakeAdmin(admin.ModelAdmin):
 
 @admin.register(Like)
 class LikeAdmin(admin.ModelAdmin):
-    list_display = ('name', 'id')
+    list_display = ('user', 'vehicle', 'id')
 
     
 

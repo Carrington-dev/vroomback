@@ -107,6 +107,10 @@ curl -X GET -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b
 ## Understand DBshell
 ```bash
 python manage.py dbshell
+https://fig.io/manual/django-admin/dbshell
+
+
+docker run --hostname=0bf79f2334c7 --mac-address=02:42:ac:11:00:03 --env=POSTGRES_PASSWORD=#Mulalo96 --env=POSTGRES_DB=vroomhive_cardealer --env=POSTGRES_USER=root --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/16/bin --env=GOSU_VERSION=1.17 --env=LANG=en_US.utf8 --env=PG_MAJOR=16 --env=PG_VERSION=16.3-1.pgdg120+1 --env=PGDATA=/var/lib/postgresql/data --volume=/var/lib/postgresql/data -p 5432:5432 --restart=no --runtime=runc -d postgres
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE news_contact (
