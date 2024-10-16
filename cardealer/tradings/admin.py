@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from tradings.utils import MAX_OBJECTS
 from tradings.actions import duplicate_event, mark_as_accidentcar, mark_as_democar, mark_as_draft, mark_as_newcar, mark_as_oldcar, mark_as_published, remove_copy_on_title, switch_to_default_thumbnail
-from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
+from tradings.models import CarModel, City, Color, Country, Enquiry, Image, Like, Make, State, Variant, Vehicle, VehicleKeyFeatures, VehicleOtherFeatures
 
 
 class VariantInline(admin.TabularInline):
@@ -35,6 +35,12 @@ class ModelAdmin(admin.ModelAdmin):
 
 @admin.register(Make)
 class MakeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'id')
+
+    
+
+@admin.register(Like)
+class LikeAdmin(admin.ModelAdmin):
     list_display = ('name', 'id')
 
     
