@@ -329,6 +329,7 @@ class Like(models.Model):
     class Meta:
         # Ensures that a user can only like a post once
         unique_together = ('user', 'vehicle')
+        ordering = [ 'created_at', "id" ]
 
     def __str__(self):
         return f"{self.user.username} liked {self.vehicle.title}"
