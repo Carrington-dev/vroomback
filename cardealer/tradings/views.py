@@ -158,13 +158,13 @@ class LikeViewSet(ModelViewSet):
     filterset_fields = ( "user_id", "vehicle_id", )
     
 
-    # @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
-    # def list(self, request, *args, **kwargs):
-    #     return super().list(request, *args, **kwargs)
+    @method_decorator(cache_page(60 * 1))  # Cache for 15 minutes
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
-    # @method_decorator(cache_page(60 * 15))
-    # def retrieve(self, request, *args, **kwargs):
-    #     return super().retrieve(request, *args, **kwargs)
+    @method_decorator(cache_page(60 * 1))
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
 class EnquiryViewSet(ModelViewSet):
     serializer_class = EnquirySerializer
