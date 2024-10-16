@@ -154,6 +154,9 @@ class VariantModelViewSet(VehicleMixin):
 class LikeViewSet(ModelViewSet):
     serializer_class = LikeSerializer
     queryset = Like.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ( "user_id", "vehicle_id", )
+    
 
     # @method_decorator(cache_page(60 * 15))  # Cache for 15 minutes
     # def list(self, request, *args, **kwargs):
